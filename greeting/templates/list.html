@@ -1,0 +1,22 @@
+<html>
+<head>
+<title> Expense Tracker Beta </title>
+</head>
+<body>
+<h1>Expense Tracker 2.0 Beta</h1>
+
+<form method='POST'>
+{% csrf_token %}
+{{form}}
+<input type='submit' value='Add'>
+</form>
+
+
+<h1>Current Notes</h1>
+<ul>
+{% for note in notes %}
+<li>{{ note }}</li>
+{% endfor %}
+</ul>
+</body>
+</html>

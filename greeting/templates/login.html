@@ -1,0 +1,17 @@
+<body>
+
+
+<h1>Login</h1>
+<form method='POST'>
+{% csrf_token %}
+<input type='text' required="True" name='username'>
+<input type='password' required="True" name='password'>
+<input type='Submit' value='Login'>
+</form>
+
+<p>
+{{response}}
+</p>
+
+
+</body>
