@@ -3,9 +3,15 @@
 
 <form method='POST'>
 {% csrf_token %}
-{{form}}
-<input type='submit' value='Register'>
+    <label>First Name: </label><input type="text" name="first_name"><br>
+    <label>Last Name: </label><input type="text" name="last_name"><br>
+    <label>Email: </label><input type="email" name="email"><br>
+    <label>Username: </label><input type="text" name="username"><br>
+    <label>Password: </label><input type="password" name="password"><br>
+    <label>Confirm Password: </label><input type="password" name="password_confirm"><br>
+    <input type='submit' value='Register'>
 </form>
 
+<p>{{response}}</p>
 
 </body>

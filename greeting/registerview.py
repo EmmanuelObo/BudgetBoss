@@ -1,24 +1,21 @@
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
-from .forms import RegisterForm
 
 
 def register(request):
-	form = RegisterForm(request.POST)
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    email = request.POST.get('email')
+    response = ''
 
+    if username is not None and password is not None:
+        user = User.objects.create_user(username=username, email=email,
+                                        password=password)
+        if user is not None:
+            response = user.username + ' successfully registered!'
 
-	if form.is_valid():
+        else:
+            response = 'User registeration unsuccessful'
 
-		new_user = User.objects.create_user(username = form.cleaned_data['username'], 
-			 first_name=form.cleaned_data['first_name'],
-			last_name=form.cleaned_data['last_name'])
-
-		new_user.password = form.cleaned_data['password']
-		new_user.email = form.cleaned_data['email']
-
-		new_user.save()
-
-		form = RegisterForm()
-
-	return render(request, 'register.html', {'form': form})
+    return render(request, 'register.html', {'response': response})
