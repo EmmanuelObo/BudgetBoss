@@ -18,10 +18,10 @@ from django.contrib import admin
 from greeting import views, listview, loginview, registerview
 
 urlpatterns = [
-	url(r'^list/', listview.home),
-    url(r'^login/', loginview.login),
+    url(r'^$', views.index),
+    url(r'^home/', views.home),
+    url(r'^list/', listview.home),
+    url(r'^login/', loginview.user_login),
     url(r'^register/', registerview.register),
-	url(r'^hello/', views.index),
-    url(r'^admin/', admin.site.urls) 
+    url(r'^admin/', admin.site.urls)
 ]
-

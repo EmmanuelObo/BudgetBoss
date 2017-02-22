@@ -1,13 +1,21 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.contrib.auth import logout
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 
 
 def index(request):
-	text = "Hello World this is Emmanuel's first Django App!"
-	html = "<html><body style='text-align: center;'><h1>"+ text +"</h1></body></html>"
-	note = 'hello world'
-
-	return HttpResponse('Hello World - Emmanuel Obogbaimhe')
+    return render(request, 'welcome.html', {})
 
 def home(request):
-	return HttpResponse("Homepage")
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'home.html', {'user': user})
+
+    else:
+        return render(request, 'home.html', {'error': 'No User\'s Authenticated'})
+
+
+def user_logout(request):
+    if request.POST.get('logoutBtn'):
+        logout(request)
+        return HttpResponseRedirect('/login')

@@ -1,17 +1,18 @@
+{% extends "base.html" %}
 <body>
-
 
 <h1>Login</h1>
 <form method='POST'>
+<div class="form-group">
 {% csrf_token %}
 <input type='text' required="True" name='username'>
 <input type='password' required="True" name='password'>
 <input type='Submit' value='Login'>
+</div>
 </form>
 
-<p>
+<p class="text-center error">
 {{response}}
 </p>
-
 
 </body>
