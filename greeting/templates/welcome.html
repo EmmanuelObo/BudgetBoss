@@ -1,5 +1,10 @@
+ {% extends "base.html" %}
 
-<h1>Welcome to The Expense Tracker</h1>
+ {% block content %}
+<div class="content-container">
+<h1>The Expense Tracker</h1>
 <a href="/login" class="btn btn-primary" role="button">Login</a>
-<a href="/register" class="btn btn-default" role="button">Register</a>
-{% extends "base.html" %}
+<a href="/register" class="btn btn-default" role="button">Sign Up</a>
+ </div>
+
+ {% endblock %}

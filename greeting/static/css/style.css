@@ -2,4 +2,20 @@
 {
     font-family: "Candara", "Arial", sans-serif;
     color: red;
+    font-weight: bold;
+}
+
+body{
+    text-align: center;
+}
+
+
+h1
+{
+font-family: "Candara", "Arial", sans-serif;
+}
+
+.content-container
+{
+margin: 15% auto;
 }

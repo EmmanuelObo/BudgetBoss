@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^home/', views.home),
     url(r'^list/', listview.home),
     url(r'^login/', loginview.user_login),
+    url(r'^logout/', views.user_logout),
     url(r'^register/', registerview.register),
     url(r'^admin/', admin.site.urls)
 ]

@@ -1,18 +1,37 @@
-{% extends "base.html" %}
-<body>
+    {% extends "base.html" %}
 
+{% block content %}
+    <div class="content-container">
 <h1>Login</h1>
 <form method='POST'>
-<div class="form-group">
+<div class="form-group form-horizontal">
 {% csrf_token %}
-<input type='text' required="True" name='username'>
-<input type='password' required="True" name='password'>
-<input type='Submit' value='Login'>
-</div>
+    <div class="form-group">
+            <label class="control-label col-sm-2">Username: </label>
+        <div class="col-sm-4">
+            <input type="text" name="username" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+            <label class="control-label col-sm-2">Password: </label>
+        <div class="col-sm-4">
+            <input type="password" name="password" class="form-control">
+        </div>
+    </div>
+
+    <input class="btn btn-primary" type="Submit" value="Submit">
 </form>
 
-<p class="text-center error">
-{{response}}
-</p>
+        {% if response != None %}
+    <p class="text-center error">
+    {{response}}
+    </p>
 
-</body>
+        {% endif %}
+        </div>
+
+{% endblock %}
+
+
+

@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.contrib.auth import logout
-from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 
 
 def index(request):
     return render(request, 'welcome.html', {})
+
 
 def home(request):
     if request.user.is_authenticated:
@@ -16,6 +17,5 @@ def home(request):
 
 
 def user_logout(request):
-    if request.POST.get('logoutBtn'):
-        logout(request)
-        return HttpResponseRedirect('/login')
+    logout(request)
+    return HttpResponseRedirect('/login')
