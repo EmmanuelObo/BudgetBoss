@@ -1,22 +1,47 @@
-<html>
-<head>
-<title> Expense Tracker Beta </title>
-</head>
-<body>
-<h1>Expense Tracker 2.0 Beta</h1>
-
-<form method='POST'>
-{% csrf_token %}
-{{form}}
-<input type='submit' value='Add'>
-</form>
+{% extends "base.html" %}
 
 
-<h1>Current Notes</h1>
-<ul>
-{% for note in notes %}
-<li>{{ note }}</li>
-{% endfor %}
-</ul>
-</body>
-</html>
+{% block content %}
+
+<div class="container">
+<div class="panel panel-default">
+<div class="panel-heading"><h2>{{ user.username }}'s Lists</h2></div>
+
+
+    <table class="table">
+        <tr>
+            <th style="font-family: 'Tahoma', 'Arial', sans-serif;">Title</th>
+            <th style="font-family: 'Tahoma', 'Arial', sans-serif;">Item Count</th>
+            <th style="font-family: 'Tahoma', 'Arial', sans-serif;">Total</th>
+        </tr>
+    {% for list in user.list_set.all %}
+        <tr>
+            <th>{{list.title}}</th>
+            <th>{{list.count}}</th>
+            <th>${{list.total | floatformat:-2}}</th>
+            <th><a href="#" class="btn btn-default"><span class="glyphicon glyphicon-search"></a>
+            <a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></th>
+        </tr>
+    {% endfor %}
+    </table>
+
+    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+            <a href="#" aria-label="Previous">
+             <span aria-hidden="true">&laquo;</span>
+                </a>
+        </li>
+    <li><a href="#">1</a></li>
+      <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+      </li>
+      </ul>
+    </nav>
+</div>
+
+{% endblock %}

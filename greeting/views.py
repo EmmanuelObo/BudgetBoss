@@ -1,19 +1,25 @@
-from django.shortcuts import render
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 
 
 def index(request):
-    return render(request, 'welcome.html', {})
+
+        return render(request, 'welcome.html')
 
 
 def home(request):
     if request.user.is_authenticated:
         user = request.user
-        return render(request, 'home.html', {'user': user})
+        user_lists = user.list_set
+        error = None
+        return render(request, 'home.html',
+                      {'user': user, 'error': error,
+                       'user_lists': user_lists})
 
     else:
-        return render(request, 'home.html', {'error': 'No User\'s Authenticated'})
+        error = 'No User\'s Authenticated'
+        return render(request, 'home.html', {'error': error})
 
 
 def user_logout(request):

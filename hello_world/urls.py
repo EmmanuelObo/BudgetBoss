@@ -20,7 +20,7 @@ from greeting import views, listview, loginview, registerview
 urlpatterns = [
     url(r'^$', views.index),
     url(r'^home/', views.home),
-    url(r'^list/', listview.home),
+    url(r'^list/', listview.central),
     url(r'^login/', loginview.user_login),
     url(r'^logout/', views.user_logout),
     url(r'^register/', registerview.register),

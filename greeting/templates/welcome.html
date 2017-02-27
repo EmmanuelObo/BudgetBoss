@@ -1,10 +1,17 @@
  {% extends "base.html" %}
 
+ {% block mainmenu %}
+
+ {% endblock %}
+
  {% block content %}
-<div class="content-container">
+<div class="container content-container">
 <h1>The Expense Tracker</h1>
 <a href="/login" class="btn btn-primary" role="button">Login</a>
 <a href="/register" class="btn btn-default" role="button">Sign Up</a>
+ <br>
+<br>
+ <a href="/home">Continue as guest...</a>
  </div>
 
  {% endblock %}

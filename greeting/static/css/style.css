@@ -9,7 +9,6 @@ body{
     text-align: center;
 }
 
-
 h1
 {
 font-family: "Candara", "Arial", sans-serif;
@@ -17,5 +16,29 @@ font-family: "Candara", "Arial", sans-serif;
 
 .content-container
 {
-margin: 15% auto;
+margin: 13% auto;
+}
+
+.info
+{
+font-family: "Candara", "Times New Roman", sans-serif;
+font-size: 20px;
+}
+
+.btn
+{
+font-family: "Tahoma", "Times New Roman", sans-serif;
+}
+
+.badge{
+background-color: #337ab7;
+}
+
+.copyright{
+font-family: "Calibri", "Arial", sans-serif;
+}
+
+.dropdown-menu>li>a{
+background-color: #222222;
+color: #9b9a97;
 }

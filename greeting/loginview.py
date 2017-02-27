@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 
 
 def user_login(request):
+    response = None
     username = request.POST.get('username')
     password = request.POST.get('password')
     user = authenticate(username=username, password=password)
@@ -13,6 +14,7 @@ def user_login(request):
         return HttpResponseRedirect('/home')
 
     else:
-        return render(request, 'login.html', {'response': 'Login unsuccessful'})
+        response = 'Login Unsuccessful'
+        return render(request, 'login.html', {'response': response})
 
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'login.html', {'form': form, 'response': response})
