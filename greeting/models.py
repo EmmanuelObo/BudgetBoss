@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class List(models.Model):
-    title = models.CharField(max_length=20)
+    title = models.CharField(max_length=20, null=True)
     total = models.IntegerField()
     count = models.IntegerField(default=0)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)

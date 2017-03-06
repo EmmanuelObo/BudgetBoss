@@ -1,7 +1,7 @@
-from django.http import HttpResponse
+from . import listfunc
 from django.shortcuts import render
-from .forms import NewItemForm
 
 
 def central(request):
+    listfunc.create_list(request)
     return render(request, 'list.html', {"user": request.user})

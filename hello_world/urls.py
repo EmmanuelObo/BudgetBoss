@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+
+from greeting import contentview
 from greeting import views, listview, loginview, registerview
 
 urlpatterns = [
@@ -24,5 +26,6 @@ urlpatterns = [
     url(r'^login/', loginview.user_login),
     url(r'^logout/', views.user_logout),
     url(r'^register/', registerview.register),
-    url(r'^admin/', admin.site.urls)
+    url(r'^admin/', admin.site.urls),
+    url(r'^homecontent/', contentview.userhomecontent)
 ]

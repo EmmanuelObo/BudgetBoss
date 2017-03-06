@@ -1,10 +1,13 @@
 from django.contrib.auth import logout
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
+from . import listfunc
 
 
 def index(request):
-
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/home')
+    else:
         return render(request, 'welcome.html')
 
 
@@ -13,6 +16,7 @@ def home(request):
         user = request.user
         user_lists = user.list_set
         error = None
+        listfunc.create_list(request)
         return render(request, 'home.html',
                       {'user': user, 'error': error,
                        'user_lists': user_lists})

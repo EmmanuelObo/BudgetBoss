@@ -4,7 +4,8 @@ from django.http import HttpResponseRedirect
 
 
 def user_login(request):
-    response = None
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/home')
     username = request.POST.get('username')
     password = request.POST.get('password')
     user = authenticate(username=username, password=password)

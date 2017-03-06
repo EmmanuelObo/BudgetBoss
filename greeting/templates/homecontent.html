@@ -1,0 +1,12 @@
+{% block mainmenu %}
+{% endblock %}
+
+<h1>Welcome, {{user.username}}</h1>
+
+<h3> You have <b>{{ user.list_set.all | length }}</b> Active Lists </h3>
+<p>What will you like to do today?</p>
+<a href="#" class="btn btn-success" role="button" data-toggle="modal" data-target="#newListModal">Create</a>
+    {% if user.list_set.all %}
+    <a href="/list" class="btn btn-default" role="button">View</a>
+    <a href="#" class="btn btn-primary" role="button">Edit</a>
+    {% endif %}
