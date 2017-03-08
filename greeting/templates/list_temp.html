@@ -1,0 +1,40 @@
+<div class="container">
+<div class="panel panel-default">
+<div class="panel-heading"><h2 style="font-family: 'Candara', 'Arial', sans-serif;">{{ user.username }}'s Lists</h2></div>
+
+    <table class="table">
+        <tr>
+            <th style="font-family: 'Century Gothic', 'Arial', sans-serif;">Title</th>
+            <th style="font-family: 'Century Gothic', 'Arial', sans-serif;">Item Count</th>
+            <th style="font-family: 'Century Gothic', 'Arial', sans-serif;">Total</th>
+        </tr>
+    {% for list in user.list_set.all %}
+        <tr>
+            <th>{{list.title}}</th>
+            <th>{{list.count}}</th>
+            <th>${{list.total | floatformat:-2}}</th>
+            <span id="listid-{{forloop.counter}}"hidden> {{list.id}}</span>
+            <th><a href="#" class="btn btn-default" id="quick-view-list-btn-{{forloop.counter}}"><span class="glyphicon glyphicon-search"></a>
+            <a href="#" class="btn btn-primary" id="edit-list-btn-{{forloop.counter}}"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a href="#" class="btn btn-danger delete-list-btn" id="delete-list-btn-{{forloop.counter}}"><span class="glyphicon glyphicon-remove"></span></a></th>
+        </tr>
+    {% endfor %}
+    </table>
+
+    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+            <a href="#" aria-label="Previous">
+             <span aria-hidden="true">&laquo;</span>
+                </a>
+        </li>
+    <li><a href="#">1</a></li>
+      <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+      </li>
+      </ul>
+    </nav>
+</div>

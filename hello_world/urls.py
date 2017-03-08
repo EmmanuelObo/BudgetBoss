@@ -27,5 +27,7 @@ urlpatterns = [
     url(r'^logout/', views.user_logout),
     url(r'^register/', registerview.register),
     url(r'^admin/', admin.site.urls),
-    url(r'^homecontent/', contentview.userhomecontent)
+    url(r'^homecontent/', contentview.userhomecontent),
+    url(r'^listtemp/', listview.listtemplate)
+
 ]
