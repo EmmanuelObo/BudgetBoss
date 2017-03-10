@@ -1,7 +1,7 @@
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
-from . import listfunc
+from greeting import listfunc
 
 
 def index(request):

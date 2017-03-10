@@ -1,5 +1,3 @@
-$(document).ready(function(){
-
 var savebtn = $('#save-list-btn')
 var searchform = $('#search-form')
 $('#newListModal').on('shown.bs.modal', function() {
@@ -21,7 +19,7 @@ savebtn.on('click', function(){
              success: function(){
                       var currlistcount = parseInt($('#list-count-badge').html(), 10) + 1
                       if(window.location.pathname == "/home/")
-                        $('#testdiv').load('http://127.0.0.1:8000/homecontent')
+                        $('#testdiv').load('http://127.0.0.1:8000/hometemp')
 
                       else if(window.location.pathname == "/list/")
                         $('#list-template').load('http://127.0.0.1:8000/listtemp')
@@ -46,7 +44,6 @@ savebtn.on('click', function(){
                 var cookies = document.cookie.split(';');
           for (var i = 0; i < cookies.length; i++) {
                var cookie = jQuery.trim(cookies[i]);
-          // Does this cookie string begin with the name we want?
           if (cookie.substring(0, name.length + 1) == (name + '=')) {
             cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
               break;
@@ -57,11 +54,51 @@ savebtn.on('click', function(){
 }
 
 $('.delete-list-btn').on('click', function(){
-
+var csrftoken = getCookie('csrftoken')
 var currBtn = $(this).attr('id')
-console.log("Delete Button Clicked")
-console.log(currBtn)
+var ID = currBtn[currBtn.length-1]
+var listID = $('#listid-'+ID).text().trim()
+var currlistcount = parseInt($('#list-count-badge').html(), 10) - 1
+console.log(ID)
+console.log(listID)
 
+$.ajax({
+url: window.location.pathname,
+type: 'POST',
+data: { csrfmiddlewaretoken : csrftoken,
+listId:listID   },
+success: function(){
+console.log("List successfully deleted!")
+$('#list-template').load('http://127.0.0.1:8000/listtemp')
+$('#list-count-badge').text(currlistcount.toString())
+},
+error: function(err){
+console.log("Uh Oh. Something went wrong!")
+console.log(err)
+}
+})
 })
 
-})
+//$('.edit-list-btn').on('click', function(){
+//var csrftoken = getCookie('csrftoken')
+//var currBtn = $(this).attr('id')
+//var ID = currBtn[currBtn.length-1]
+//var listID = $('#listid-'+ID).text().trim()
+//console.log(ID)
+//console.log(listID)
+//
+//$.ajax({
+//url: window.location.pathname,
+//type: 'POST',
+//data: { csrfmiddlewaretoken : csrftoken,
+//listId:listID   },
+//success: function(){
+//console.log("Edit List Mode")
+//$('#list-template').load('http://127.0.0.1:8000/editlisttemp')
+//},
+//error: function(err){
+//console.log("Uh Oh. Something went wrong!")
+//console.log(err)
+//}
+//})
+//})

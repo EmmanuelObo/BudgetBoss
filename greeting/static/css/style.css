@@ -42,3 +42,11 @@ font-family: "Calibri", "Arial", sans-serif;
 background-color: #222222;
 color: #9b9a97;
 }
+
+.add-item-btn{
+  border-radius: 30px;
+}
+
+.glyphicon-plus{
+    margin: 3px;
+}

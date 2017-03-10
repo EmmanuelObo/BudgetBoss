@@ -84,7 +84,7 @@
         <form class="form-modal form">
           <div class="form-group">
              {% csrf_token %}
-            <input type="text" placeholder="List Name" class="form-control" id="input-list-title">
+            <input required type="text" placeholder="List Name" class="form-control" id="input-list-title">
           </div>
         </form>
       </div>
@@ -99,7 +99,6 @@
 {% endblock %}
 
 {% block content %}
-<script src="/static/js/script.js"></script>
 {% endblock %}
 
 
