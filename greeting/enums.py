@@ -1,6 +1,6 @@
 priorities = [
-    ('H', 'HIGH'),
-    ('M', 'MEDIUM'),
-    ('L', 'LOW')]
+    ('HIGH', 'HIGH'),
+    ('MEDIUM', 'MEDIUM'),
+    ('LOW', 'LOW')]
 
 status = ('ACTIVE', 'INACTIVE', 'COMPLETED')

@@ -1,32 +1,16 @@
 from .models import List
 
 
-# noinspection SpellCheckingInspection
-def create_list(request):
+def list_ops(request):
     if request.is_ajax():
-        listtitle = request.POST.get('newListTitle')
-        if listtitle is None or listtitle == "":
-            return
-        else:
-            List.objects.create(title=listtitle, total=0, owner=request.user)
+        if request.POST.get('newListTitle') is not None:
+            title = request.POST.get('newListTitle')
+            List.objects.create(title=title, total=0, owner=request.user)
 
-
-def delete_list(request):
-    if request.is_ajax():
-        listID = request.POST.get('listId')
-        if listID is None or listID == "":
-            return
-        else:
-            listID = int(listID)
+        elif request.POST.get('listId') is not None:
+            listID = int(request.POST.get('listId'))
             List.objects.get(pk=listID).delete()
 
-
-def edit_list(request):
-    if request.is_ajax():
-        listID = request.POST.get('listId')
-        if listID is None or listID == "":
-            return
-        else:
-            listID = int(listID)
-            user_list = List.objects.get(pk=listID)
-            return user_list
+        elif request.POST.get('editListId'):
+            listID = int(request.POST.get('editListId'))
+            request.session['currentListId'] = listID

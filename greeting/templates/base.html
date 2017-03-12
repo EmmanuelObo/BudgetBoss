@@ -81,16 +81,17 @@
         <h4 class="modal-title" id="myModalLabel" style="font-family: 'Tahoma', 'Arial', sans-serif;">Create New List</h4>
       </div>
       <div class="modal-body">
-        <form class="form-modal form">
+        <form class="form-modal form" id="new-list-prompt">
           <div class="form-group">
              {% csrf_token %}
             <input required type="text" placeholder="List Name" class="form-control" id="input-list-title">
+            <input type="submit" style="display:none;" >
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id="save-list-btn">Save & Close</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" id="modal-close-btn">Close</button>
       </div>
     </div>
   </div>

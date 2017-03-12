@@ -16,7 +16,7 @@ def home(request):
         user = request.user
         user_lists = user.list_set
         error = None
-        listfunc.create_list(request)
+        listfunc.list_ops(request)
         return render(request, 'home.html',
                       {'user': user, 'error': error,
                        'user_lists': user_lists})

@@ -1,8 +1,13 @@
+document.addEventListener('DOMContentLoaded', function() {
 var savebtn = $('#save-list-btn')
 var searchform = $('#search-form')
 $('#newListModal').on('shown.bs.modal', function() {
   $('#input-list-title').focus();
 });
+
+$('#modal-close-btn').on('click', function(){
+$('#newListModal').modal('toggle')
+})
 
 savebtn.on('click', function(){
              data = []
@@ -38,22 +43,42 @@ savebtn.on('click', function(){
               console.log('List has been saved!')
               })
 
-          function getCookie(name) {
-          var cookieValue = null;
-          if (document.cookie && document.cookie != '') {
-                var cookies = document.cookie.split(';');
-          for (var i = 0; i < cookies.length; i++) {
-               var cookie = jQuery.trim(cookies[i]);
-          if (cookie.substring(0, name.length + 1) == (name + '=')) {
-            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-              break;
-             }
-          }
-      }
- return cookieValue;
-}
+$('#new-list-prompt').on('submit', function(e){
+             e.preventDefault()
+             data = []
+             data['newListTitle'] = $('#input-list-title').val()
+             JSON.stringify(data)
+             var csrftoken = getCookie('csrftoken')
+             $.ajax({
+             type: 'POST',
+             url: window.location.pathname,
+             data: {
+                      csrfmiddlewaretoken : csrftoken,
+                      newListTitle: data['newListTitle']
+                      },
+             success: function(){
+                      var currlistcount = parseInt($('#list-count-badge').html(), 10) + 1
+                      if(window.location.pathname == "/home/")
+                        $('#testdiv').load('http://127.0.0.1:8000/hometemp')
 
-$('.delete-list-btn').on('click', function(){
+                      else if(window.location.pathname == "/list/")
+                        $('#list-template').load('http://127.0.0.1:8000/listtemp')
+
+                      $('#list-count-badge').text(currlistcount.toString())
+                      $('#input-list-title').val('')
+                      $('#newListModal').modal('toggle')
+                       console.log('List successfully created');
+                       console.log(data);
+                       },
+             error: function(data){
+                      console.log('ERROR: Something went wrong. Try again.')
+                      console.log(data)
+                      }
+             })
+              console.log('List has been saved!')
+})
+
+$(document).on('click','.delete-list-btn', function(){
 var csrftoken = getCookie('csrftoken')
 var currBtn = $(this).attr('id')
 var ID = currBtn[currBtn.length-1]
@@ -63,7 +88,7 @@ console.log(ID)
 console.log(listID)
 
 $.ajax({
-url: window.location.pathname,
+url: '/list/',
 type: 'POST',
 data: { csrfmiddlewaretoken : csrftoken,
 listId:listID   },
@@ -79,26 +104,95 @@ console.log(err)
 })
 })
 
-//$('.edit-list-btn').on('click', function(){
-//var csrftoken = getCookie('csrftoken')
-//var currBtn = $(this).attr('id')
-//var ID = currBtn[currBtn.length-1]
-//var listID = $('#listid-'+ID).text().trim()
-//console.log(ID)
-//console.log(listID)
-//
-//$.ajax({
-//url: window.location.pathname,
-//type: 'POST',
-//data: { csrfmiddlewaretoken : csrftoken,
-//listId:listID   },
-//success: function(){
-//console.log("Edit List Mode")
-//$('#list-template').load('http://127.0.0.1:8000/editlisttemp')
-//},
-//error: function(err){
-//console.log("Uh Oh. Something went wrong!")
-//console.log(err)
-//}
-//})
-//})
+$(document).on('click', '.edit-list-btn', function(){
+var csrftoken = getCookie('csrftoken')
+var currBtn = $(this).attr('id')
+var ID = currBtn[currBtn.length-1]
+var listID = $('#listid-'+ID).text().trim()
+console.log(ID)
+console.log(listID)
+
+$.ajax({
+url: window.location.pathname,
+type: 'POST',
+data: { csrfmiddlewaretoken : csrftoken,
+editListId: listID   },
+success: function(){
+window.location.pathname= '/editlist/'
+console.log("Edit List Mode")
+},
+error: function(err){
+console.log("Uh Oh. Something went wrong!")
+console.log(err)
+}
+})
+})
+
+$(document).on('click','#add-item-btn', function(){
+var name = $('#new-item-name')
+var cost = $('#new-item-cost')
+var priority = $('#new-item-priority')
+var currListID = $('#current-list-id').text().trim()
+
+
+console.log(currListID)
+console.log(name.val())
+console.log(cost.val())
+if($.isNumeric(cost.val()))
+{
+    var csrftoken = getCookie('csrftoken')
+    console.log("Valid Cost Input")
+    $.ajax({
+    url: window.location.pathname,
+    type: 'POST',
+    data: {csrfmiddlewaretoken : csrftoken,
+            newItemName: name.val(),
+            newItemCost: cost.val(),
+            newItemPriority: priority.val(),
+            currListID: currListID},
+    success: function()
+            {
+                console.log('New Item Successfully Added.')
+                $('#editlist-template').load('http://127.0.0.1:8000/editlisttemp')
+            },
+    error: function(err)
+            {
+                console.log('Oops! Looks like something went wrong.')
+                console.log(err)
+            },
+    done: function()
+            {
+                console.log('ALL DONE!')
+            }
+    })
+}
+else{
+    console.log("Invalid Cost Input")
+    }
+console.log(priority.val())
+
+clear(name,cost,priority)
+})
+
+function clear(first, second, third){
+    first.val("")
+    second.val("")
+    third.val("MEDIUM")
+}
+
+function getCookie(name) {
+  var cookieValue = null;
+  if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+  for (var i = 0; i < cookies.length; i++) {
+       var cookie = jQuery.trim(cookies[i]);
+  if (cookie.substring(0, name.length + 1) == (name + '=')) {
+    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+      break;
+     }
+  }
+}
+ return cookieValue;
+}
+
+}, false);

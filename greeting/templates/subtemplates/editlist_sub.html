@@ -1,33 +1,47 @@
-<div class="panel panel-default">
-<div class="panel-heading"><h2 style="font-family: 'Candara', 'Arial', sans-serif;">{{list.title}}</h2></div>
-
+<div class="panel panel-primary">
+<div class="panel-heading"><h2 style="font-family: 'Candara', 'Arial', sans-serif;">{{list}}</h2></div>
+    <span id="current-list-id" hidden>{{list.id}}</span>
     <table class="table">
+        {% for item in list.item_set.all %}
         <tr>
-            <th><p>Place list info here...</p></th>
+            <th><p>{{item.name}}</p></th>
+            <th><p>${{item.cost}}</p></th>
+            <th><p>{{item.priority}}</p></th>
+            <th>{{list.dateCreated|date:"m-d-y @ h:i a"}}</th>
         </tr>
+        {% empty %}
+            <p>This list currently has no items in it...</p>
+        {% endfor %}
         <tr>
             <th>
-                <form>
+                <form class="form-inline">
                     <div class="form-group col-md-8">
-                        <input class="form-control" type="text" placeholder="Item Name">
+                        <input class="form-control" id="new-item-name" type="text" placeholder="Item Name">
                     </div>
                 </form>
             </th>
             <th>
-                <div class="dropdown">
-                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Priority
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="#">High</a></li>
-                    <li><a href="#">Medium</a></li>
-                    <li><a href="#">Low</a></li>
-                  </ul>
-                </div>
+                <form class="form-inline">
+                    <div class="form-group col-md-8">
+                        <div class="form-group">
+                        <label class="sr-only" for="new-item-cost">Amount (in dollars)</label>
+                        <div class="input-group">
+                          <div class="input-group-addon">$</div>
+                          <input type="text" class="form-control" id="new-item-cost" step=".01" placeholder="Amount">
+                        </div>
+                      </div>
+                    </div>
+                </form>
             </th>
             <th>
-                <button class="btn btn-success add-item-btn"><span class="glyphicon glyphicon-plus"></span></button>
+                  <select id="new-item-priority">
+                      <option>HIGH</option>
+                      <option selected>MEDIUM</option>
+                      <option>LOW</option>
+                  </select>
+            </th>
+            <th>
+                <button class="btn btn-success" id="add-item-btn"><span class="glyphicon glyphicon-plus"></span></button>
             </th>
         </tr>
     </table>

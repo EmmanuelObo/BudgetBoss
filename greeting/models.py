@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
+from . import enums
 
 
 class List(models.Model):
@@ -17,15 +18,21 @@ class List(models.Model):
         else:
             super(List, self).save(*args, **kwargs)
 
+    def calculate(self):
+        items = self.item_set.all()
+        for item in items:
+            self.total += item.cost
+            self.count += 1
+
     def __str__(self):
         return self.title
 
 
 class Item(models.Model):
     name = models.CharField(max_length=50)
-    note = models.CharField(max_length=256)
+    note = models.TextField(null=True, blank=True)
     cost = models.DecimalField(decimal_places=2, max_digits=1000000)
-    priority = models.CharField(max_length=10)
+    priority = models.CharField(max_length=10, choices=enums.priorities)
     dateCreated = models.DateTimeField(default=datetime.now, blank=True)
     list = models.ForeignKey(List, on_delete=models.CASCADE)
 
