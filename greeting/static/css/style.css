@@ -50,3 +50,15 @@ color: #9b9a97;
 .glyphicon-plus{
     margin: 3px;
 }
+
+.list-col, .item-col
+{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 13.5px;
+}
+
+.field-col
+{
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+}

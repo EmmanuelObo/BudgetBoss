@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 var savebtn = $('#save-list-btn')
 var searchform = $('#search-form')
+
 $('#newListModal').on('shown.bs.modal', function() {
   $('#input-list-title').focus();
 });
@@ -24,10 +25,15 @@ savebtn.on('click', function(){
              success: function(){
                       var currlistcount = parseInt($('#list-count-badge').html(), 10) + 1
                       if(window.location.pathname == "/home/")
-                        $('#testdiv').load('http://127.0.0.1:8000/hometemp')
+                        $('#list-template').load('http://127.0.0.1:8000/hometemp')
 
                       else if(window.location.pathname == "/list/")
-                        $('#list-template').load('http://127.0.0.1:8000/listtemp')
+                      {
+                        $('#list-template').fadeOut(400)
+                        setTimeout(function(){
+                        $('#list-template').load('http://127.0.0.1:8000/listtemp', function(){ $(this).fadeIn(400)})
+                        },400)
+                      }
 
                       $('#list-count-badge').text(currlistcount.toString())
                       $('#input-list-title').val('')
@@ -62,7 +68,12 @@ $('#new-list-prompt').on('submit', function(e){
                         $('#testdiv').load('http://127.0.0.1:8000/hometemp')
 
                       else if(window.location.pathname == "/list/")
-                        $('#list-template').load('http://127.0.0.1:8000/listtemp')
+                      {
+                        $('#list-template').fadeOut(400)
+                        setTimeout(function(){
+                        $('#list-template').load('http://127.0.0.1:8000/listtemp', function(){ $(this).fadeIn(400)})
+                        },400)
+                      }
 
                       $('#list-count-badge').text(currlistcount.toString())
                       $('#input-list-title').val('')

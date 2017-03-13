@@ -4,10 +4,10 @@
     <table class="table">
         {% for item in list.item_set.all %}
         <tr>
-            <th><p>{{item.name}}</p></th>
-            <th><p>${{item.cost}}</p></th>
-            <th><p>{{item.priority}}</p></th>
-            <th>{{list.dateCreated|date:"m-d-y @ h:i a"}}</th>
+            <th class="item-col"><p>{{item.name}}</p></th>
+            <th class="item-col"><p>${{item.cost}}</p></th>
+            <th class="item-col"><p>{{item.priority}}</p></th>
+            <th class="item-col">{{list.dateCreated|date:"m-d-y @ h:i a"}}</th>
         </tr>
         {% empty %}
             <p>This list currently has no items in it...</p>
