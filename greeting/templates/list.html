@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
+  {% block title %}
+  <title>BudgetBoss | List</title>
+  {% endblock title %}
+
 {% block content %}
 <div class="content-container container" id="list-template">
     {% include "subtemplates/list_sub.html" %}
 </div>
 
 {% endblock %}
-

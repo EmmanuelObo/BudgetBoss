@@ -57,8 +57,27 @@ color: #9b9a97;
     font-size: 13.5px;
 }
 
+.list-col:hover{
+    cursor:hand;
+}
+
+
+
 .field-col
 {
     font-family: 'Rajdhani', sans-serif;
     font-size: 18px;
+}
+
+.welcome-title
+{
+    font-family: 'Audiowide', cursive;
+    font-size: 50px;
+}
+
+.form-login
+{
+    max-width: 550px;
+    padding: 15px;
+    margin: 0 auto;
 }

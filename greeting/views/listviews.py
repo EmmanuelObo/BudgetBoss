@@ -2,11 +2,16 @@ from greeting import listfunc, itemfunc
 from django.shortcuts import render
 from ..models import List
 import datetime
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def central(request):
+    print('LIST VIEW!')
     listfunc.list_ops(request)
     user_lists = request.user.list_set.order_by('-dateCreated')
+    print(user_lists)
     return render(request, 'list.html', {"user": request.user, "user_list": user_lists})
 
 

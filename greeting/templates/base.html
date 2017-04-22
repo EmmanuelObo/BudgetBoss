@@ -1,5 +1,10 @@
 
 <head>
+
+  {% block title%}
+  <title>BudgetBoss</title>
+  {% endblock title %}
+
 {% block bootstrap %}
 <link href="/static/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 <link href="/static/css/style.css" type="text/css" rel="stylesheet">
@@ -86,6 +91,21 @@
           <div class="form-group">
              {% csrf_token %}
             <input required type="text" placeholder="List Name" class="form-control" id="input-list-title">
+
+            <select id="category-dropdown" class="form-control category-dropdown">
+              <option default value="">Select a Category</option>
+              {% for category in user.category_set.all %}
+              {% if category.title == "All" %}
+
+              <option value={{category.title}} hidden>{{category.title}}</option>
+
+              {% else %}
+
+              <option value={{category.title}}>{{category.title}}</option>
+
+              {% endif %}
+              {% endfor %}
+            </select>
             <input type="submit" style="display:none;" >
           </div>
         </form>

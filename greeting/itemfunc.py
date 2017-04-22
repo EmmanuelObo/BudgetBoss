@@ -11,3 +11,7 @@ def item_ops(request):
             currList = List.objects.get(pk=int(listID))
             Item.objects.create(name=itemName, cost=itemCost, note="",
                                 priority=itemPriority, list=currList)
+
+        elif request.POST.get('itemId') is not None:
+            itemID = int(request.POST.get('itemId'))
+            Item.objects.get(pk=itemID).delete()

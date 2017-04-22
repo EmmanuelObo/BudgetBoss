@@ -4,36 +4,22 @@
     {% endblock %}
 
 {% block content %}
-    <div class="jumbotron">
-        <div class="container">
+    <div class="content-container container jumbotron">
             <h1>Login</h1>
-    <form method='POST'>
-    <div class="form-group form-horizontal">
+    <form method='POST' class="form-login">
     {% csrf_token %}
-        <div class="form-group">
-                <label class="control-label col-sm-2">Username: </label>
-            <div class="col-sm-4">
-                <input type="text" name="username" class="form-control">
-            </div>
-        </div>
+                <label class="control-label">Username </label><br>
+                <input type="text" name="username" class="form-control"><br>
 
-        <div class="form-group">
-                <label class="control-label col-sm-2">Password: </label>
-            <div class="col-sm-4">
-                <input type="password" name="password" class="form-control">
-            </div>
-        </div>
+                <label class="control-label">Password </label>
+                <input type="password" name="password" class="form-control"><br>
 
         <input class="btn btn-primary" type="Submit" value="Submit">
     </form>
     <br>
-            {% if response != None %}
+            {% if response == None %}
     <div class="alert alert-danger col-sm-10" role="alert">{{response}}</div>
             {% endif %}
         </div>
-        </div>
 
 {% endblock %}
-
-
-

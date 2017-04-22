@@ -1,13 +1,17 @@
+
+
 <div class="panel panel-primary">
 <div class="panel-heading"><h2 style="font-family: 'Candara', 'Arial', sans-serif;">{{list}}</h2></div>
     <span id="current-list-id" hidden>{{list.id}}</span>
     <table class="table">
         {% for item in list.item_set.all %}
         <tr>
+            <span id="item-id-{{forloop.counter}}"hidden> {{item.id}}</span>
             <th class="item-col"><p>{{item.name}}</p></th>
             <th class="item-col"><p>${{item.cost}}</p></th>
             <th class="item-col"><p>{{item.priority}}</p></th>
             <th class="item-col">{{list.dateCreated|date:"m-d-y @ h:i a"}}</th>
+            <th><button class="btn btn-danger delete-item-btn" id="delete-item-btn-{{forloop.counter}}"><span class="glyphicon glyphicon-remove"></span></button></th>
         </tr>
         {% empty %}
             <p>This list currently has no items in it...</p>
@@ -45,5 +49,4 @@
             </th>
         </tr>
     </table>
-
 </div>

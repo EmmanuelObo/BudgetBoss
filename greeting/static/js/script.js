@@ -10,6 +10,10 @@ $('#modal-close-btn').on('click', function(){
 $('#newListModal').modal('toggle')
 })
 
+$("#category-dropdown").on("click", function(){
+    $("#category-dropdown").children().first().css("display","none");
+})
+
 savebtn.on('click', function(){
              data = []
              data['newListTitle'] = $('#input-list-title').val()
@@ -25,7 +29,9 @@ savebtn.on('click', function(){
              success: function(){
                       var currlistcount = parseInt($('#list-count-badge').html(), 10) + 1
                       if(window.location.pathname == "/home/")
-                        $('#list-template').load('http://127.0.0.1:8000/hometemp')
+                      {
+                        $('#list-template').load('http://127.0.0.1:8000/hometemp');
+                      }
 
                       else if(window.location.pathname == "/list/")
                       {
@@ -65,8 +71,9 @@ $('#new-list-prompt').on('submit', function(e){
              success: function(){
                       var currlistcount = parseInt($('#list-count-badge').html(), 10) + 1
                       if(window.location.pathname == "/home/")
-                        $('#testdiv').load('http://127.0.0.1:8000/hometemp')
-
+                      {
+                        $('#list-template').load('http://127.0.0.1:8000/hometemp');
+                      }
                       else if(window.location.pathname == "/list/")
                       {
                         $('#list-template').fadeOut(400)
@@ -98,15 +105,42 @@ var currlistcount = parseInt($('#list-count-badge').html(), 10) - 1
 console.log(ID)
 console.log(listID)
 
+$.ajax
+({
+    url: '/list/',
+    type: 'POST',
+    data: { csrfmiddlewaretoken : csrftoken,
+    listId:listID   },
+    success: function()
+    {
+        console.log("List successfully deleted!")
+        $('#list-template').load('http://127.0.0.1:8000/listtemp')
+        $('#list-count-badge').text(currlistcount.toString())
+    },
+    error: function(err)
+    {
+        console.log("Uh Oh. Something went wrong!")
+        console.log(err)
+    }
+})
+})
+
+$(document).on('click','.delete-item-btn', function(){
+var csrftoken = getCookie('csrftoken')
+var currBtn = $(this).attr('id')
+var ID = currBtn[currBtn.length-1]
+var itemID = $('#item-id-'+ID).text().trim()
+console.log(ID)
+console.log(itemID)
+
 $.ajax({
-url: '/list/',
+url: '/editlist/',
 type: 'POST',
 data: { csrfmiddlewaretoken : csrftoken,
-listId:listID   },
+itemId: itemID   },
 success: function(){
-console.log("List successfully deleted!")
-$('#list-template').load('http://127.0.0.1:8000/listtemp')
-$('#list-count-badge').text(currlistcount.toString())
+console.log("Item successfully deleted!")
+$('#editlist-template').load('http://127.0.0.1:8000/editlisttemp')
 },
 error: function(err){
 console.log("Uh Oh. Something went wrong!")
@@ -145,10 +179,14 @@ var cost = $('#new-item-cost')
 var priority = $('#new-item-priority')
 var currListID = $('#current-list-id').text().trim()
 
-
 console.log(currListID)
 console.log(name.val())
 console.log(cost.val())
+
+$(document).ajaxComplete(function(){
+$('#new-item-name').focus()
+})
+
 if($.isNumeric(cost.val()))
 {
     var csrftoken = getCookie('csrftoken')
