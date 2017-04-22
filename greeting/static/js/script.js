@@ -17,6 +17,7 @@ $("#category-dropdown").on("click", function(){
 savebtn.on('click', function(){
              data = []
              data['newListTitle'] = $('#input-list-title').val()
+             data['newListCat'] = $('#category-dropdown').val()
              JSON.stringify(data)
              var csrftoken = getCookie('csrftoken')
              $.ajax({
@@ -24,7 +25,8 @@ savebtn.on('click', function(){
              url: window.location.pathname,
              data: {
                       csrfmiddlewaretoken : csrftoken,
-                      newListTitle: data['newListTitle']
+                      newListTitle: data['newListTitle'],
+                      newListCat: data['newListCat']
                       },
              success: function(){
                       var currlistcount = parseInt($('#list-count-badge').html(), 10) + 1
@@ -59,6 +61,7 @@ $('#new-list-prompt').on('submit', function(e){
              e.preventDefault()
              data = []
              data['newListTitle'] = $('#input-list-title').val()
+             data['newListCat'] = $('#category-dropdown').val()
              JSON.stringify(data)
              var csrftoken = getCookie('csrftoken')
              $.ajax({
@@ -66,7 +69,8 @@ $('#new-list-prompt').on('submit', function(e){
              url: window.location.pathname,
              data: {
                       csrfmiddlewaretoken : csrftoken,
-                      newListTitle: data['newListTitle']
+                      newListTitle: data['newListTitle'],
+                      newListCat: data['newListCat']
                       },
              success: function(){
                       var currlistcount = parseInt($('#list-count-badge').html(), 10) + 1
@@ -89,7 +93,11 @@ $('#new-list-prompt').on('submit', function(e){
                        console.log(data);
                        },
              error: function(data){
-                      console.log('ERROR: Something went wrong. Try again.')
+                      console.error('ERROR: Something went wrong. Try again.')
+                      if($('#category-dropdown').val() == "")
+                      {
+                        console.error("PLEASE SELECT A CATEGORY");
+                      }
                       console.log(data)
                       }
              })

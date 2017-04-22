@@ -28,7 +28,7 @@ class List(models.Model):
                              null=True, blank=True)
     total = models.IntegerField()
     count = models.IntegerField(default=0)
-    # category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     dateCreated = models.DateTimeField(default=datetime.now, blank=True)
 
