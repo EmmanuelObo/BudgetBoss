@@ -8,7 +8,10 @@
 {% block content %}
 <div class="container">
 <div class="panel panel-default">
-<div class="panel-heading"><h2 style="font-family: 'Quicksand', sans-serif;">{{ user }}'s Lists</h2></div>
+<div class="panel-heading">
+    <h2 style="font-family: 'Quicksand', sans-serif;">{{ user }}'s Lists</h2>
+    <p>Total: ${{ category.total }}</p>
+</div>
 
     <div class="table-responsive">
     <table class="table table-hover">
@@ -17,14 +20,15 @@
             <th class="field-col">Item Count</th>
             <th class="field-col">Total</th>
             <th class="field-col">Date Created</th>
+            <th class="field-col">Category</th>
         </tr>
     {% for list in user_list %}
-        <span hidden>{{list.calculate}}</span>
         <tr>
             <th class='list-col'>{{list.title}}</th>
             <th class='list-col'>{{list.count}}</th>
             <th class='list-col'>${{list.total | floatformat:-2}}</th>
             <th class='list-col'>{{list.dateCreated|date:"m-d-y @ h:i a"}}</th>
+            <th class='list-col'>{{list.category}}</th>
             <span id="listid-{{forloop.counter}}"hidden> {{list.id}}</span>
             <th><!--<a href="#" class="btn btn-default" id="quick-view-list-btn-{{forloop.counter}}"><span class="glyphicon glyphicon-search"></a>-->
             <button class="btn btn-primary edit-list-btn" id="edit-list-btn-{{forloop.counter}}"><span class="glyphicon glyphicon-pencil"></span></button>

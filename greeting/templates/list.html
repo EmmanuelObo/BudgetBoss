@@ -5,6 +5,14 @@
   {% endblock title %}
 
 {% block content %}
+<div class="container">
+    <label>Category: </label>
+    <select id="category-sorting-dropdown" class="category-dropdown">
+        {% for category in user.category_set.all %}
+        <option value={{category.title}}>{{category.title}}</option>
+        {% endfor %}
+    </select>
+</div>
 <div class="content-container container" id="list-template">
     {% include "subtemplates/list_sub.html" %}
 </div>

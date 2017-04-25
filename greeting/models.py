@@ -9,9 +9,19 @@ class Category(models.Model):
     User's Expense List Categories
     """
     title = models.CharField(max_length=30)
-    total = models.IntegerField(default=0)
-    count = models.IntegerField(default=0)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    @property
+    def total(self):
+        total = 0
+        lists = self.list_set.all()
+        for catList in lists:
+            total += catList.total
+        return total
+
+    @property
+    def count(self):
+        return len(self.list_set.all())
 
     def __str__(self):
         return self.title
@@ -26,8 +36,6 @@ class List(models.Model):
     """
     title = models.CharField(max_length=20, default='Empty',
                              null=True, blank=True)
-    total = models.IntegerField()
-    count = models.IntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     dateCreated = models.DateTimeField(default=datetime.now, blank=True)
@@ -40,11 +48,17 @@ class List(models.Model):
         else:
             super(List, self).save(*args, **kwargs)
 
-    def calculate(self):
+    @property
+    def count(self):
+        return len(self.item_set.all())
+
+    @property
+    def total(self):
+        total = 0
         items = self.item_set.all()
         for item in items:
-            self.total += item.cost
-            self.count += 1
+            total += item.cost
+        return total
 
     def __str__(self):
         return self.title
