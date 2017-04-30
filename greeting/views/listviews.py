@@ -4,6 +4,7 @@ from ..models import List, Category
 import datetime
 
 
+
 def sortByCategory(request):
     if request.is_ajax():
         if request.POST.get('selectedCategory') is not None:
@@ -25,11 +26,14 @@ def listtemplate(request):
     selectedCategory = request.session['selectedCategory']
     if selectedCategory == 'All':
         filteredList = request.user.list_set.order_by('-dateCreated')
+        allCat = Category.objects.get(title=selectedCategory)
         return render(request, 'subtemplates/list_sub.html', {"user": request.user, "user_list": filteredList,
-                                                              "category": Category.objects.get(title=selectedCategory)})
+                                                              "category": allCat })
 
     filteredList = List.objects.filter(category=Category.objects.get(title=request.session['selectedCategory']),
                                        owner=request.user)
+
+    filteredList = filteredList.order_by('-dateCreated')
     print(filteredList)
     return render(request, 'subtemplates/list_sub.html', {"user": request.user, "user_list": filteredList,
                                                           "category": Category.objects.get(title=selectedCategory)})

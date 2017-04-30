@@ -60,6 +60,11 @@ class List(models.Model):
             total += item.cost
         return total
 
+    def countAll(self):
+        lists = List.objects.all()
+        allCat = Category.objects.get(title="All")
+        allCat.count = len(lists)
+
     def __str__(self):
         return self.title
 

@@ -8,15 +8,26 @@ document.addEventListener('DOMContentLoaded', function()
     var catDropdown = $('#category-dropdown')
     var sortingCatDropdown = $('#category-sorting-dropdown')
     var inputListTitle = $('#input-list-title')
+    var addLimitBtn = $('#add-limit-btn')
+    var inputListLimit = $('#input-list-limit')
 
     newListModal.on('shown.bs.modal', function()
     {
         inputListTitle.focus();
+        if(inputListLimit.is(':visible'))
+        {
+            inputListLimit.hide();
+        }
+
     });
 
     modalCloseBtn.on('click', function()
     {
         newListModal.modal('toggle');
+        inputListLimit.hide();
+        inputListLimit.find('input').val('');
+        addLimitBtn.text('Add Limit');
+        inputListTitle.val('');
     });
 
     catDropdown.on('click', function()
@@ -33,6 +44,23 @@ document.addEventListener('DOMContentLoaded', function()
     {
         e.preventDefault();
         saveNewList();
+    });
+
+    addLimitBtn.on('click', function(e)
+    {
+        e.preventDefault();
+        inputListLimit.toggle();
+        if(inputListLimit.is(':visible'))
+        {
+            console.info('List limit is visible');
+            $(this).text('Remove Limit');
+        }
+        else
+        {
+            console.info('List limit is hidden');
+            inputListLimit.find('input').val('');
+            $(this).text('Add Limit');
+        }
     });
 
     $(document).on('change', '#category-sorting-dropdown', function()
