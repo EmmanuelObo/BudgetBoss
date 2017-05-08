@@ -26,7 +26,11 @@
         <tr>
             <th class='list-col'>{{list.title}}</th>
             <th class='list-col'>{{list.count}}</th>
-            <th class='list-col'>${{list.total | floatformat:-2}}</th>
+            {% if list.hasExceededLimit == True %}
+                <th class='list-col' style="color: crimson;">${{list.total | floatformat:-2}}</th>
+            {% else %}
+                <th class='list-col'>${{list.total | floatformat:-2}}</th>
+            {% endif %}
             <th class='list-col'>{{list.dateCreated|date:"m-d-y @ h:i a"}}</th>
             <th class='list-col'>{{list.category}}</th>
             <span id="listid-{{forloop.counter}}"hidden> {{list.id}}</span>

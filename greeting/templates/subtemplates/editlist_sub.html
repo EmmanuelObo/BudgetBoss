@@ -50,3 +50,15 @@
         </tr>
     </table>
 </div>
+
+{% if list.limit != None %}
+
+    <div class="container">
+        <h3 style="font-family: Calibri, Candara, Arial, sans-serif;">List Limit: ${{list.limit}}</h3>
+
+        {% if list.hasExceededLimit == True %}
+            <p style="color: crimson;"> LIMIT EXCEEDED! (${{list.total}}) </p>
+        {% endif %}
+    </div>
+
+{% endif %}

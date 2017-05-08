@@ -253,9 +253,19 @@ document.addEventListener('DOMContentLoaded', function()
 
     function saveNewList()
     {
-         data = []
-         data['newListTitle'] = $('#input-list-title').val()
-         data['newListCat'] = $('#category-dropdown').val()
+         var listLimit = parseFloat(inputListLimit.find('input').val());
+         data = [];
+         data['newListTitle'] = $('#input-list-title').val();
+         data['newListCat'] = $('#category-dropdown').val();
+         if(listLimit > 0 && listLimit != undefined && listLimit != null)
+         {
+            data['newListLimit'] = listLimit;
+         }
+         else
+         {
+            data['newListLimit'] = 'NO LIMIT'
+         }
+
          JSON.stringify(data)
          var csrftoken = getCookie('csrftoken')
          $.ajax({
@@ -264,7 +274,8 @@ document.addEventListener('DOMContentLoaded', function()
          data: {
                   csrfmiddlewaretoken : csrftoken,
                   newListTitle: data['newListTitle'],
-                  newListCat: data['newListCat']
+                  newListCat: data['newListCat'],
+                  newListLimit: data['newListLimit']
                   },
          success: function(){
                   var currlistcount = parseInt($('#list-count-badge').html(), 10) + 1

@@ -39,8 +39,7 @@ class List(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     dateCreated = models.DateTimeField(default=datetime.now, blank=True)
-
-    # limit = models.IntegerField(default=None, null=True, blank=True)
+    limit = models.DecimalField(decimal_places=2, max_digits=10000000, default=None, null=True, blank=True)
 
     def save(self, *args, **kwargs):
         if self.title == "" or self.title is None:
@@ -60,10 +59,12 @@ class List(models.Model):
             total += item.cost
         return total
 
-    def countAll(self):
-        lists = List.objects.all()
-        allCat = Category.objects.get(title="All")
-        allCat.count = len(lists)
+    def hasExceededLimit(self):
+        if self.total > self.limit:
+            return True
+
+        elif self.total < self.limit:
+            return False
 
     def __str__(self):
         return self.title
