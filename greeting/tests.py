@@ -33,4 +33,4 @@ class UserCreatedTest(TestCase):
         session.save()
 
         for item in userList.item_set.all():
-            print(item.name)
+            print("--> " +item.name)
