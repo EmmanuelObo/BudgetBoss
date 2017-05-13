@@ -24,7 +24,6 @@ class UserCreatedTest(TestCase):
         Item.objects.create(name='Red Velvet Deluxe', cost=69.99, priority='MEDIUM', list=userList)
 
 
-
         self.assertTrue(userList.hasExceededLimit())
         session = self.client.session
 
@@ -33,12 +32,5 @@ class UserCreatedTest(TestCase):
         session['pass'] = loggedInUser.password
         session.save()
 
-        print(userList.item_set.order_by('priority'))
-
-    def sortItems(self, a, b):
-        if a == 'HIGH' and b == 'MEDIUM':
-            return 1
-        elif a == b:
-            return 0
-        else:
-            return -1
+        for item in userList.item_set.all():
+            print(item.name)
