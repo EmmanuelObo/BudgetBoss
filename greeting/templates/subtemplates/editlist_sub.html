@@ -4,7 +4,7 @@
 <div class="panel-heading"><h2 style="font-family: 'Candara', 'Arial', sans-serif;">{{list}}</h2></div>
     <span id="current-list-id" hidden>{{list.id}}</span>
     <table class="table">
-        {% for item in list.item_set.all %}
+        {% for item in list.item_set.prioritize %}
         <tr>
             <span id="item-id-{{forloop.counter}}"hidden> {{item.id}}</span>
             <th class="item-col"><p>{{item.name}}</p></th>

@@ -1,7 +1,7 @@
 from django.test import TestCase
 from .models import List, Category, Item
 from django.contrib.auth.models import User
-
+from operator import attrgetter
 
 # Create your tests here.
 
@@ -18,19 +18,17 @@ class UserCreatedTest(TestCase):
 
         self.assertEquals(userList.limit, 100, msg='INCORRECT VALUE')
 
+        Item.objects.create(name='Vanilla Ice Cream', cost=10, priority='LOW', list=userList)
+        Item.objects.create(name='Cheesecake Deluxe', cost=2, priority='HIGH', list=userList)
+        Item.objects.create(name='Red Velvet Deluxe', cost=5, priority='MEDIUM', list=userList)
+        Item.objects.create(name='Jello', cost=5, priority='LOW', list=userList)
+        Item.objects.create(name='Bread', cost=5, priority='HIGH', list=userList)
+        Item.objects.create(name='Marshmellows', cost=5, priority='LOW', list=userList)
 
-        Item.objects.create(name='Vanilla Ice Cream', cost=6.99, priority='LOW', list=userList)
-        Item.objects.create(name='Cheesecake Deluxe', cost=59.99, priority='HIGH', list=userList)
-        Item.objects.create(name='Red Velvet Deluxe', cost=69.99, priority='MEDIUM', list=userList)
-
-
-        self.assertTrue(userList.hasExceededLimit())
         session = self.client.session
-
-        self.assertEquals(len(userList.item_set.all()), 3, msg='WRONG AMOUNT')
 
         session['pass'] = loggedInUser.password
         session.save()
 
-        for item in userList.item_set.all():
-            print("--> " +item.name)
+        for item in Item.objects.prioritize():
+            print(item)

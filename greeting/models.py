@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
 from . import enums
+from operator import attrgetter
 
 
 class Category(models.Model):
@@ -69,6 +70,14 @@ class List(models.Model):
     def __str__(self):
         return self.title
 
+class ItemManager(models.Manager):
+    def sort_out(self, arr):
+        return sorted(arr, key=attrgetter('item_value'), reverse = True)
+
+    def prioritize(self):
+        prio = self.all()
+        prioritized = self.sort_out(prio)
+        return prioritized
 
 class Item(models.Model):
     """
@@ -77,9 +86,19 @@ class Item(models.Model):
     name = models.CharField(max_length=50)
     note = models.TextField(null=True, blank=True)
     cost = models.DecimalField(decimal_places=2, max_digits=1000000)
-    priority = models.CharField(max_length=10, choices=enums.priorities)
+    priority = models.CharField(max_length=10, choices=enums.priorities, default='MEDIUM')
     dateCreated = models.DateTimeField(default=datetime.now, blank=True)
     list = models.ForeignKey(List, on_delete=models.CASCADE)
+    objects = ItemManager()
+
+    @property
+    def item_value(self):
+        if self.priority == 'HIGH':
+            return 2
+        elif self.priority == 'MEDIUM':
+            return 1
+        elif self.priority == 'LOW':
+            return 0
 
     def __str__(self):
         return self.name
