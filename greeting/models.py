@@ -39,7 +39,7 @@ class List(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     dateCreated = models.DateTimeField(default=datetime.now, blank=True)
-    limit = models.DecimalField(decimal_places=2, max_digits=10000000, default=None, null=True, blank=True)
+    limit = models.DecimalField(decimal_places=2, max_digits=100, default=None, null=True, blank=True)
 
     def save(self, *args, **kwargs):
         if self.title == "" or self.title is None:
@@ -76,7 +76,7 @@ class Item(models.Model):
     """
     name = models.CharField(max_length=50)
     note = models.TextField(null=True, blank=True)
-    cost = models.DecimalField(decimal_places=2, max_digits=1000000)
+    cost = models.DecimalField(decimal_places=2, max_digits=999)
     priority = models.CharField(max_length=10, choices=enums.priorities)
     dateCreated = models.DateTimeField(default=datetime.now, blank=True)
     list = models.ForeignKey(List, on_delete=models.CASCADE)
