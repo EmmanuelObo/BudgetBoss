@@ -27,6 +27,8 @@ class UserCreatedTest(TestCase):
 
         session = self.client.session
 
+        print(Item.objects.__doc__)
+
         session['pass'] = loggedInUser.password
         session.save()
 
