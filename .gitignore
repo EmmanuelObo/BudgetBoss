@@ -4,3 +4,5 @@
 /debug.log
 .idea
 /budgetboss/budgetboss-demo.mp4
+*.pyo
+*.pyc
