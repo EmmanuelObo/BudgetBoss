@@ -1,7 +1,8 @@
 /env/
-/greeting/migrations/
+/app/migrations/
 /db.sqlite3
 /debug.log
 .idea
-/hello_world/budgetboss-demo.mp4
-
+/budgetboss/budgetboss-demo.mp4
+*.pyo
+*.pyc
