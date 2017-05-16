@@ -1,4 +1,5 @@
-from .models import List, Category
+from lists.models import List
+from categories.models import Category
 import logging
 
 logger = logging.getLogger(__name__)

@@ -1,4 +1,5 @@
-from .models import List, Item
+from lists.models import List
+from items.models import Item
 
 
 def item_ops(request):

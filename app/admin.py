@@ -1,6 +1,8 @@
 from django.contrib import admin
 
-from .models import List, Item, Category
+from lists.models import List
+from items.models import Item
+from categories.models import Category
 
 # Register your models here.
 

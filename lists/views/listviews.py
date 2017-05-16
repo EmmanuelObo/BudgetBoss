@@ -1,8 +1,11 @@
-from greeting import listfunc, itemfunc
-from django.shortcuts import render
-from ..models import List, Category
 import datetime
 
+from django.shortcuts import render
+
+from items.helpers import itemfunc
+from lists.helpers import listfunc
+from lists.models import List
+from categories.models import Category
 
 
 def sortByCategory(request):

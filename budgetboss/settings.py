@@ -30,7 +30,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'greeting.apps.GreetingConfig',
+    'budgets.apps.BudgetsConfig',
+    'lists.apps.ListsConfig',
+    'categories.apps.CategoriesConfig',
+    'items.apps.ItemsConfig',
+    'app.apps.GreetingConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,12 +53,12 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'hello_world.urls'
+ROOT_URLCONF = 'budgetboss.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['./greeting/templates'],
+        'DIRS': ['./app/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'hello_world.wsgi.application'
+WSGI_APPLICATION = 'budgetboss.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases

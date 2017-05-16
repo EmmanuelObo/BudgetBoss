@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from greeting.views import loginview, contentview, registerview, listviews, views
+from app.views import loginview, contentview, registerview, views
+from lists.views import listviews
 
 urlpatterns = [
     url(r'^$', views.index),
