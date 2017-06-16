@@ -3,6 +3,11 @@
 /db.sqlite3
 /debug.log
 .idea
+<<<<<<< HEAD
+/hello_world/budgetboss-demo.mp4
+
+=======
 /budgetboss/budgetboss-demo.mp4
 *.pyo
 *.pyc
+>>>>>>> architecture

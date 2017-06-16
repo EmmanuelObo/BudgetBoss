@@ -81,3 +81,10 @@ color: #9b9a97;
     padding: 15px;
     margin: 0 auto;
 }
+
+.background-pic
+{
+    background: url("../image/GoldenGateBridge.jpg");
+    height: 300px;
+    width: 200px;
+}

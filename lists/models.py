@@ -23,10 +23,18 @@ class List(models.Model):
 
     @property
     def count(self):
+        '''
+        Return the total amount of Item's in this List
+        :return: 
+        '''
         return len(self.item_set.all())
 
     @property
     def total(self):
+        '''
+        Returns the total cost of all the Item's in this List
+        :return: 
+        '''
         total = 0
         items = self.item_set.all()
         for item in items:
@@ -34,6 +42,9 @@ class List(models.Model):
         return total
 
     def hasExceededLimit(self):
+        '''
+        Returns true if the List total is greater than the limit set by the User
+        '''
         if self.total > self.limit:
             return True
 

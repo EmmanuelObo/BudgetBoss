@@ -1,5 +1,7 @@
 from django.test import TestCase
-from .models import List, Category, Item
+from lists.models import List
+from items.models import Item
+from categories.models import Category
 from django.contrib.auth.models import User
 from operator import attrgetter
 
@@ -34,3 +36,5 @@ class UserCreatedTest(TestCase):
 
         for item in Item.objects.prioritize():
             print(item)
+
+
