@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function()
         })
     }
 
-    function saveNewList()
+   /* function saveNewList()
     {
          var listLimit = parseFloat(inputListLimit.find('input').val());
          data = [];
@@ -304,6 +304,51 @@ document.addEventListener('DOMContentLoaded', function()
                   }
          })
           console.log('List has been saved!')
+    }*/
+
+    function saveNewList()
+    {
+        var data = JSON.stringify({
+            "category": "/api/v1/category/" + categoryTranslation($('#category-dropdown').val())+ "/",
+            "limit": parseFloat(inputListLimit.find('input').val()),
+            "title": $('#input-list-title').val(),
+            "user": "/api/v1/owner/1/"
+        })
+
+        $.ajax({
+            url: '/api/v1/list/',
+            type: 'POST',
+            contentType: 'application/json',
+            data: data,
+            dataType: 'json',
+            success: function(data)
+                {
+                    var currlistcount = parseInt($('#list-count-badge').html(), 10) + 1
+                  if(window.location.pathname == "/home/")
+                  {
+                    $('#list-template').load('http://127.0.0.1:8000/hometemp');
+                  }
+
+                  else if(window.location.pathname == "/list/")
+                  {
+                    $('#list-template').fadeOut(400)
+                    setTimeout(function(){
+                    $('#list-template').load('http://127.0.0.1:8000/listtemp', function(){ $(this).fadeIn(400)})
+                    },400)
+                  }
+
+                  $('#list-count-badge').text(currlistcount.toString())
+                  $('#input-list-title').val('')
+                  $('#newListModal').modal('toggle')
+                   console.log('List successfully created');
+                   console.info(data)
+                },
+            error: function(err)
+                {
+                    console.info(err)
+                },
+            processData: false
+        })
     }
 
     function getCookie(name)
@@ -323,5 +368,22 @@ document.addEventListener('DOMContentLoaded', function()
             }
         }
         return cookieValue;
+    }
+
+    function categoryTranslation(category)
+    {
+        switch(category)
+        {
+            case "Bills":
+                return "2";
+            case "Loans":
+                return "3";
+            case "Luxury":
+                return "4";
+            case "Home":
+                return "5";
+            case "Health":
+                return "6";
+        }
     }
 }, false);
