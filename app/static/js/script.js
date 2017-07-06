@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function()
             data: { csrfmiddlewaretoken : csrftoken,
             editListId: listID   },
             success: function(){
-            window.location.pathname= '/editlist/'
+            window.location.pathname= '/list/edit/'+listID
             console.log("Edit List Mode")
         },
         error: function(err)

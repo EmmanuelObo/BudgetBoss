@@ -33,17 +33,19 @@ bb_api.register(ItemResource())
 
 urlpatterns = [
     url(r'^$', views.index),
-    url(r'^home/', views.home),
-    url(r'^list/', listviews.central),
+    url(r'^home/$', views.home, name='home'),
+    url(r'^list/$', listviews.central, name='users_lists'),
+    url(r'^list/(\d+)/$', listviews.currlist),
+    url(r'^list/edit/(\d+)$',listviews.editlist, name='edit_list'),
     url(r'^editlist/', listviews.editlist),
     url(r'^editlisttemp/', listviews.editlisttemplate),
-    url(r'^login/', loginview.user_login),
-    url(r'^logout/', views.user_logout),
-    url(r'^register/', registerview.register),
+    url(r'^login/', loginview.user_login, name='login'),
+    url(r'^logout/', views.user_logout, name='logout'),
+    url(r'^register/', registerview.register, name='register'),
     url(r'^admin/', admin.site.urls),
     url(r'^hometemp/', contentview.hometemplate),
     url(r'^listtemp/', listviews.listtemplate),
-    url(r'^api/', include(bb_api.urls)),
+    url(r'^api/', include(bb_api.urls), name='api'),
      ]
 # urlpatterns = format_suffix_patterns(urlpatterns)
 

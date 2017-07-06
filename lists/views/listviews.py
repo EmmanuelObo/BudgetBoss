@@ -1,5 +1,6 @@
 import datetime
 
+from django.http import HttpResponse
 from django.shortcuts import render
 
 from items.helpers import itemfunc
@@ -42,9 +43,8 @@ def listtemplate(request):
                                                           "category": Category.objects.get(title=selectedCategory)})
 
 
-def editlist(request):
-    currentListID = request.session['currentListId']
-    user_list = List.objects.get(pk=currentListID)
+def editlist(request, id):
+    user_list = List.objects.get(pk=id)
     itemfunc.item_ops(request)
     return render(request, 'editlist.html',
                   {"user": request.user, 'list': user_list, 'time_now': datetime.datetime.now})
@@ -56,3 +56,9 @@ def editlisttemplate(request):
     itemfunc.item_ops(request)
     return render(request, 'subtemplates/editlist_sub.html',
                   {"user": request.user, 'list': user_list, 'time_now': datetime.datetime.now})
+
+def currlist(request, id):
+    mylist = List.objects.get(pk=id)
+    if mylist == None:
+        return HttpResponse("List Not Found!")
+    return HttpResponse("List Title: " + mylist.title + ", \n ID: " + str(mylist.id))
