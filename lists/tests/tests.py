@@ -24,7 +24,6 @@ class FileCreationTest(TestCase):
         Item.objects.create(name='Second Item', cost=2.99, list=List.objects.get(title='Test List'), priority='MEDIUM')
 
 
-
     def testCreateFile(self):
         myList = List.objects.get(title='Test List')
 

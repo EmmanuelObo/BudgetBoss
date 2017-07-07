@@ -6,6 +6,9 @@
 {% endblock %}
 
 {% block content %}
+
+{% url view_list as view %}
+
 <div class="container">
 <div class="panel panel-default">
 <div class="panel-heading">
@@ -23,7 +26,7 @@
             <th class="field-col">Category</th>
         </tr>
     {% for list in user_list %}
-        <tr>
+        <tr class="list-row" onclick="window.location = 'view/{{list.id}}'">
             <th class='list-col'>{{list.title}}</th>
             <th class='list-col'>{{list.count}}</th>
             {% if list.hasExceededLimit == True %}
@@ -33,8 +36,7 @@
             {% endif %}
             <th class='list-col'>{{list.dateCreated|date:"m-d-y @ h:i a"}}</th>
             <th class='list-col'>{{list.category}}</th>
-            <span id="listid-{{forloop.counter}}"hidden> {{list.id}}</span>
-            <th><!--<a href="#" class="btn btn-default" id="quick-view-list-btn-{{forloop.counter}}"><span class="glyphicon glyphicon-search"></a>-->
+            <th>
             <button class="btn btn-primary edit-list-btn" id="edit-list-btn-{{forloop.counter}}"><span class="glyphicon glyphicon-pencil"></span></button>
             <button class="btn btn-danger delete-list-btn" id="delete-list-btn-{{forloop.counter}}"><span class="glyphicon glyphicon-remove"></span></button></th>
         </tr>

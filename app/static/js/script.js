@@ -88,6 +88,16 @@ document.addEventListener('DOMContentLoaded', function()
         addItem();
     })
 
+    $(document).on('click','.list-row', function(event)
+    {
+/*        if(event.target != '.edit-list-btn')
+            window.location = 'view/8'
+        else
+            console.log('Wrong Target')*/
+
+         viewList(id);
+    });
+
     function clear(first, second, third)
     {
         first.val("")
@@ -170,6 +180,11 @@ document.addEventListener('DOMContentLoaded', function()
         clear(name,cost,priority)
     }
 
+    function viewList(that)
+    {
+        window.location = that;
+    }
+
     function editList(that)
     {
         var csrftoken = getCookie('csrftoken')
@@ -186,7 +201,6 @@ document.addEventListener('DOMContentLoaded', function()
             editListId: listID   },
             success: function(){
             window.location.pathname= '/list/edit/'+listID
-            console.log("Edit List Mode")
         },
         error: function(err)
             {
@@ -206,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function()
         console.log(itemID)
 
         $.ajax({
-            url: '/editlist/',
+            url: window.location.pathname,
             type: 'POST',
             data: { csrfmiddlewaretoken : csrftoken,
             itemId: itemID   },
