@@ -4,7 +4,15 @@
     Welcome to {{title}}!
   </h1>
 
-  <button (click)="getData();">Get List Data</button>
+  <input type="text" [(ngModel)]="input" [hidden]="false" placeholder="//Enter values here" class='input-box' />
+
+  <button (click)="calculations(input)">Calculate!</button>
+  <div *ngIf="arr">
+    <h1 *ngFor="let current of arr; let i = index" > {{i}}). {{current}} </h1>
+  </div>
+<br>
+    <button (click)="getData();">Get List Data</button>
   <p>{{data}}</p>
+
 </div>
 
