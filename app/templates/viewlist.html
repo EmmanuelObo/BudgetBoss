@@ -3,15 +3,29 @@
 {% block content %}
 
 <h1>{{list.title}}</h1>
-
+<div class="container">
 {% for item in items %}
-<p>{{forloop.counter}}) {{item.name}} | ${{item.cost}}</p>
+<div class="panel panel-default panel-custom">
+    <div class="panel-heading">{{forloop.counter}}. {{item.name}}
+    {% if item.priority == 'HIGH'%}
+    <span class="label label-danger">HIGH</span>
+    {% elif item.priority == 'MEDIUM'%}
+    <span class="label label-warning">MEDIUM</span>
+    {% elif item.priority == 'LOW'%}
+    <span class="label label-primary">LOW</span>
+        {% endif %}
+    </div>
+    <div class="panel-body">
+        ${{item.cost}}
+    </div>
+</div>
 {% endfor %}
+</div>
 
 {% if items %}
-<button onclick="window.location = '/list/export/{{list.id}}'" class="btn btn-primary">Export List</button>
+<button onclick="window.location = '/list/export/{{list.id}}'" class="btn btn-primary">Export</button>
 {% else %}
-<button class="btn btn-primary" disabled >Export List</button>
+<button class="btn btn-primary" disabled >Export</button>
 {% endif %}
 
 {% endblock %}

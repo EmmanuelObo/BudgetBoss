@@ -16,16 +16,16 @@ class FileCreationTest(TestCase):
         Category.objects.create(title='Loans', owner=user)
         Category.objects.create(title='Home', owner=user)
 
-        List.objects.create(title='Test List', category=Category.objects.get(title='Bills'), owner=user)
+        List.objects.create(title='Test List v1', category=Category.objects.get(title='Bills'), owner=user)
 
         Item.objects.create(name='Third Item', cost=3.99, list=List.objects.get(title='Test List'), priority='MEDIUM')
         Item.objects.create(name='Fourth Item', cost=4.99, list=List.objects.get(title='Test List'), priority='LOW')
         Item.objects.create(name='First Item', cost=1.99, list=List.objects.get(title='Test List'), priority='HIGH')
-        Item.objects.create(name='Second Item', cost=2.99, list=List.objects.get(title='Test List'), priority='MEDIUM')
+        Item.objects.create(name ='Second Item', cost=2.99, list=List.objects.get(title='Test List'), priority='MEDIUM')
 
 
     def testCreateFile(self):
-        myList = List.objects.get(title='Test List')
+        myList = List.objects.get(title='Test List v1')
 
         file = open(myList.title + '.txt','w')
 
