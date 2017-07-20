@@ -20,5 +20,9 @@
 
   <h1 *ngIf="mylist">{{mylist.title}}</h1>
     <h1 *ngIf="mylist">{{mylist.limit}}</h1>
+
+    <br>
+  <input type="number" [(ngModel)]="id" [hidden]="false" placeholder="//Enter list id" class='input-box' />
+  <button (click)="getList(id);">Get List</button>
 </div>
 

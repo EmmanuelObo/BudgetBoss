@@ -41,6 +41,11 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  getList(input: string)
+  {
+    this.listService.get(input);
   }
+
+  ngOnInit(): void 
+  {}
 }
