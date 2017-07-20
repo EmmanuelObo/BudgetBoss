@@ -22,7 +22,7 @@ export class ListService{
     {
         //Later change to HTTP Put Method
         //to create the new list
-        currList.title = title;
+        currList.title = title || currList.title;
         currList.limit = limit || null;
         return currList;
     }

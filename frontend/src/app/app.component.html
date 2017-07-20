@@ -1,17 +1,22 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
+  <h1 [class]="appTitle">
+    < {{title}} />
   </h1>
 
   <input type="text" [(ngModel)]="input" [hidden]="false" placeholder="//Enter values here" class='input-box' />
 
+  <br>
   <button (click)="createList(input)">Create</button>
 
+  <br>
   <input type="text" [(ngModel)]="newTitle" [hidden]="false" placeholder="//Enter values here" class='input-box' />
+  <br>
+  
   <input type="number" [(ngModel)]="limit" [hidden]="false" placeholder="//Enter values here" class='input-box' />
 
-  <button (click)="updateList(newTitle,limit,mylist)">Create</button>
+  <br>
+  <button (click)="updateList(newTitle,limit,mylist)">Update</button>
 
   <h1 *ngIf="mylist">{{mylist.title}}</h1>
     <h1 *ngIf="mylist">{{mylist.limit}}</h1>
