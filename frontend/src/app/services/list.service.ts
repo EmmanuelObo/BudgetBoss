@@ -37,7 +37,7 @@ export class ListService {
                       +  'List Title: ' + response['title'] + '\n'
                       + 'List Limit: ' + '$' + response['limit'];
             console.log(body);
-        })
+        });
     }
 
     getAll():void 
@@ -45,7 +45,7 @@ export class ListService {
         this.http.get('http://127.0.0.1:8000/api/v1/list/').subscribe(data=>{
         let response = JSON.stringify(data['objects']);
         console.log(response);
-        })
+        });
     }
 
 }
