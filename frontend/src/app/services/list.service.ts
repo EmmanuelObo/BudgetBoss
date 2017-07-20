@@ -6,11 +6,18 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class ListService {
     constructor(private http: HttpClient) { }
-    create(title: string):List 
+    create(title: string, limit:string) 
     {
-        //Later change to HTTP Post Method
-        //to create the new list
-        return new List(title);
+
+        let url:string = 'http://127.0.0.1:8000/api/v1/list/'; 
+        let data:string = JSON.stringify({"category": "/api/v1/category/4/",
+            "limit": "34",
+            "title": title,
+            "user": "/api/v1/owner/1/"});
+        let body:JSON = JSON.parse(data);
+        this.http.post(url, body).subscribe(data=>{
+            console.log('New List: ' + title + ' has been created.');
+        });
     }
 
     destroy() 

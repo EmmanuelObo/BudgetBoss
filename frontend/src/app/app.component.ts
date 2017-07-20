@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   createList(input:string)
   {
-    this.mylist = this.listService.create(input);
+    this.listService.create(input, '32');
   }
 
   updateList(title:string, limit:string, currList:List)
