@@ -6,13 +6,14 @@
 
   <input type="text" [(ngModel)]="input" [hidden]="false" placeholder="//Enter values here" class='input-box' />
 
-  <button (click)="calculations(input)">Calculate!</button>
-  <div *ngIf="arr">
-    <h1 *ngFor="let current of arr; let i = index" > {{i}}). {{current}} </h1>
-  </div>
-<br>
-    <button (click)="getData();">Get List Data</button>
-  <p>{{data}}</p>
+  <button (click)="createList(input)">Create</button>
 
+  <input type="text" [(ngModel)]="newTitle" [hidden]="false" placeholder="//Enter values here" class='input-box' />
+  <input type="number" [(ngModel)]="limit" [hidden]="false" placeholder="//Enter values here" class='input-box' />
+
+  <button (click)="updateList(newTitle,limit,mylist)">Create</button>
+
+  <h1 *ngIf="mylist">{{mylist.title}}</h1>
+    <h1 *ngIf="mylist">{{mylist.limit}}</h1>
 </div>
 
