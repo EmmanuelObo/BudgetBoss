@@ -11,7 +11,7 @@ export class ListService {
 
         let url:string = 'http://127.0.0.1:8000/api/v1/list/'; 
         let data:string = JSON.stringify({"category": "/api/v1/category/4/",
-            "limit": "34",
+            "limit": (limit == '' ? '': limit),
             "title": title,
             "user": "/api/v1/owner/1/"});
         let body:JSON = JSON.parse(data);
@@ -42,7 +42,8 @@ export class ListService {
             let response = data;
             let body:string = 'List ID: ' + response['id'] + '\n'
                       +  'List Title: ' + response['title'] + '\n'
-                      + 'List Limit: ' + '$' + response['limit'];
+                      + 'List Limit: ' + 
+                      (response['limit'] == null ? 'N/A' : '$' + response['limit']);
             console.log(body);
         });
     }

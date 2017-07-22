@@ -21,9 +21,9 @@ export class AppComponent implements OnInit {
 
   mylist:List;
 
-  createList(input:string)
+  createList(input:string, limit:string)
   {
-    this.listService.create(input, '32');
+    this.listService.create(input, limit);
   }
 
   updateList(title:string, limit:string, currList:List)

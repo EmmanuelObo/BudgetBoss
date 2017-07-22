@@ -4,16 +4,18 @@
     < {{title}} />
   </h1>
 
-  <input type="text" [(ngModel)]="input" [hidden]="false" placeholder="//Enter values here" class='input-box' />
+  <input type="text" [(ngModel)]="input" [hidden]="false" placeholder="//Enter input values here" class='input-box' />
 
   <br>
-  <button (click)="createList(input)">Create</button>
+  <input type="number" [(ngModel)]="limit" [hidden]="false" placeholder="//Enter a list limit here" class='input-box' />
+  <br>
+  <button (click)="createList(input, limit);">Create</button>
 
   <br>
   <input type="text" [(ngModel)]="newTitle" [hidden]="false" placeholder="//Enter values here" class='input-box' />
   <br>
   
-  <input type="number" [(ngModel)]="limit" [hidden]="false" placeholder="//Enter values here" class='input-box' />
+  
 
   <br>
   <button (click)="updateList(newTitle,limit,mylist)">Update</button>
