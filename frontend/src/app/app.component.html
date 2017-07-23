@@ -1,4 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<!-- <div style="text-align: center">
+  <router-outlet></router-outlet>
+</div> -->
+
 <div style="text-align:center">
   <h1 [class]="appTitle">
     < {{title}} />
@@ -27,4 +31,6 @@
   <input type="number" [(ngModel)]="id" [hidden]="false" placeholder="//Enter list id" class='input-box' />
   <button (click)="getList(id);">Get List</button>
 </div>
+
+
 
