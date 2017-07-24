@@ -1,5 +1,5 @@
-import { Item } from '../item/item';
-import { Category } from '../category/category';
+import { Item } from '../_models/item';
+import { Category } from '../_models/category';
 
 export class List {
     constructor(private listtitle:string){}

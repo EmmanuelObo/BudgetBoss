@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from tastypie import fields
+from tastypie.authentication import BasicAuthentication
 from tastypie.authorization import Authorization
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from lists.models import List
@@ -10,14 +11,15 @@ from categories.models import Category
 class UserResource(ModelResource):
     class Meta:
         queryset = User.objects.all()
-        resource_name = 'owner'
-        excludes = ['email', 'password', 'is_active', 'is_staff', 'is_superuser']
+        resource_name = 'user'
+        excludes = [ 'email', 'password', 'is_active', 'is_staff', 'is_superuser']
         filtering = {
             'username': ALL,
         }
+        authentication = BasicAuthentication()
 
 class CategoryResource(ModelResource):
-    user = fields.ForeignKey(UserResource, 'owner')
+    user = fields.ForeignKey(UserResource, 'user')
 
     class Meta:
         queryset = Category.objects.all()
@@ -36,7 +38,7 @@ class ListResource(ModelResource):
         authorization = Authorization()
         resource_name = 'list'
         filtering = {
-            'user': ALL_WITH_RELATIONS,
+            'owner': ALL_WITH_RELATIONS,
             'category': ALL_WITH_RELATIONS,
         }
 

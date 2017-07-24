@@ -3,8 +3,14 @@
     <p>Please login using the form below.</p>
 </div>
 
-<form action="">
-    <input type="text" placeholder="Username" />
-    <input type="password" placeholder="Password" />
-    <input type="button" value="Login" />
+<form name="login-form" (submit)="loginForm.form.valid" action="" #loginForm="ngForm" >
+    <input type="text" placeholder="Username" required />
+    <input type="password" placeholder="Password" required />
+    <button type="submit" class="btn btn-primary">Login</button>
 </form>
+
+<!--TODO: Finish creating form
+1. Add ngModel to both username & password fields
+2. Look into how Angular forms submit via button
+3. Attach Authentication Service
+-->

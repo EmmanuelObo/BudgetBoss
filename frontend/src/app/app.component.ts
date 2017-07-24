@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CalculationService } from './services/calculations.service';
-import {ListService} from './services/list.service';
-import {List} from './list/list';
+import { CalculationService } from './_services/calculations.service';
+import {ListService} from './_services/list.service';
+import {List} from './_models/list';
 
 @Component({
   selector: 'app-root',

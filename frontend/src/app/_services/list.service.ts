@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { List } from '../list/list';
+import { List } from '../_models/list';
 import { HttpClient } from '@angular/common/http';
 
 

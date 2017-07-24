@@ -14,14 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf import settings
-from django.conf.urls import url, include, patterns
+from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
-
 from tastypie.api import Api
 
+from app.api.resources import ListResource, UserResource, ItemResource, CategoryResource
 from app.views import loginview, contentview, registerview, views
-from lists.api.resources import ListResource, UserResource, ItemResource, CategoryResource
 from lists.views import listviews
 
 bb_api = Api(api_name='v1')
