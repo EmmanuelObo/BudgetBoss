@@ -9,17 +9,22 @@ from categories.models import Category
 
 
 class UserResource(ModelResource):
+    category = fields.ToManyField('app.api.resources.CategoryResource', 'category_set', related_name='category')
+
     class Meta:
         queryset = User.objects.all()
         resource_name = 'user'
-        excludes = [ 'email', 'password', 'is_active', 'is_staff', 'is_superuser']
+        excludes = ['email', 'password', 'is_active', 'is_staff', 'is_superuser']
+        list_allowed_methods = ['get', 'post']
+        detail_allowed_methods = ['get', 'post']
         filtering = {
             'username': ALL,
         }
         authentication = BasicAuthentication()
 
 class CategoryResource(ModelResource):
-    user = fields.ForeignKey(UserResource, 'user')
+    user = fields.ToOneField(UserResource, 'owner')
+    lists = fields.ToManyField('app.api.resources.ListResource','list_set', related_name='list')
 
     class Meta:
         queryset = Category.objects.all()
@@ -31,7 +36,8 @@ class CategoryResource(ModelResource):
 
 class ListResource(ModelResource):
     user = fields.ForeignKey(UserResource, 'owner')
-    category = fields.ForeignKey(CategoryResource, 'category')
+    category = fields.ToOneField(CategoryResource, 'category')
+    item = fields.ToManyField('app.api.resources.ItemResource', 'item_set', related_name='item')
 
     class Meta:
         queryset = List.objects.all()
@@ -43,7 +49,7 @@ class ListResource(ModelResource):
         }
 
 class ItemResource(ModelResource):
-    list = fields.ForeignKey(ListResource, 'list')
+    list = fields.ToOneField(ListResource, 'list')
 
     class Meta:
         queryset = Item.objects.all()

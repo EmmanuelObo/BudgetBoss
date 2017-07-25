@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from '../_models/index';
+import { AuthenticationService } from '../_services/index';
 
 @Component({
     selector: 'app-login',
@@ -7,10 +9,26 @@ import { Component } from '@angular/core';
 })
 
 export class LoginComponent{
+    model: any = {};
+    isAuthenticated: boolean = false; 
+    submitted:boolean = false;
+    user: any;
 
-    // TODO: Finish LoginComponent
-    // 1. Add Authentication Service
-    // 2. Create a model variable to store form data (i.e. username & password)
-    // 3. Create a User variable for the currently logged in user
-    // 4. Create a login method that is served in the form and users the Authentication Service's login(username,password) method
+    constructor(private auth: AuthenticationService){}
+
+    login()
+    {
+        this.auth.login(this.model.username,this.model.password).subscribe(
+            data => {
+                this.isAuthenticated = true
+                localStorage.setItem('loggedinUser',JSON.stringify(data));
+            },
+            err => console.log(err.text()),
+            () => console.log('Request Complete'));
+    }
+
+    onSubmit()
+    {
+        this.submitted = true;
+    }
 }

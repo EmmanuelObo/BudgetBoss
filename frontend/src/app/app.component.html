@@ -1,36 +1,11 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<!-- <div style="text-align: center">
+
+ <div style="text-align: center; width:40%;">
   <router-outlet></router-outlet>
-</div> -->
+</div> 
 
 <div style="text-align:center">
   <h1 [class]="appTitle">
     < {{title}} />
   </h1>
-
-  <input type="text" [(ngModel)]="input" [hidden]="false" placeholder="//Enter input values here" class='input-box' />
-
-  <br>
-  <input type="number" [(ngModel)]="limit" [hidden]="false" placeholder="//Enter a list limit here" class='input-box' />
-  <br>
-  <button (click)="createList(input, limit);">Create</button>
-
-  <br>
-  <input type="text" [(ngModel)]="newTitle" [hidden]="false" placeholder="//Enter values here" class='input-box' />
-  <br>
-  
-  
-
-  <br>
-  <button (click)="updateList(newTitle,limit,mylist)">Update</button>
-
-  <h1 *ngIf="mylist">{{mylist.title}}</h1>
-    <h1 *ngIf="mylist">{{mylist.limit}}</h1>
-
-    <br>
-  <input type="number" [(ngModel)]="id" [hidden]="false" placeholder="//Enter list id" class='input-box' />
-  <button (click)="getList(id);">Get List</button>
-</div>
-
 
 

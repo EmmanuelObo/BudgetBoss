@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Http, Headers, Response} from '@angular/http';
+import {Http, Headers, Response, RequestOptions} from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -7,16 +8,15 @@ import 'rxjs/add/operator/map';
 export class AuthenticationService{
     constructor(private http: Http){}
 
+    headers = new Headers();
+
+
     login(username: string, password: string)
     {
-        this.http.post('http://127.0.0.1:8000/api/v1/user/',JSON.stringify({username, password})).map((response: Response) => {
-            let user = response.json();
-            if(user && user.token)
-                {
-                    localStorage.setItem('loggedinUser', JSON.stringify(user));
-                }
-            return user;
-        });
+        this.headers.append('Content-Type', "application/x-www-form-urlencoded");
+        this.headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
+
+        return this.http.get('http://127.0.0.1:8000/api/v1/user/', {headers: this.headers});
     }
 
     logout(): void 
