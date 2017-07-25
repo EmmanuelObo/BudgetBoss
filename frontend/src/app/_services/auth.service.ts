@@ -9,14 +9,23 @@ export class AuthenticationService{
     constructor(private http: Http){}
 
     headers = new Headers();
-
+    user: any = {}
 
     login(username: string, password: string)
     {
-        this.headers.append('Content-Type', "application/x-www-form-urlencoded");
-        this.headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
+        this.headers.set('Content-Type', "application/x-www-form-urlencoded");
+        this.headers.set('Authorization', 'Basic ' + btoa(username + ":" + password));
 
-        return this.http.get('http://127.0.0.1:8000/api/v1/user/', {headers: this.headers});
+        return this.http.get('http://127.0.0.1:8000/api/v1/user/?objects_only=true', {headers: this.headers})
+        .map((response: Response)=>{
+            console.log('Response (not parsed): ' + response.json())
+            let body: Object = JSON.parse(response['_body']);
+            let data:Object = body['objects'][0];
+            console.log(data);
+            localStorage.setItem('loggedinUser', data['username']);
+        })
+        
+        ;
     }
 
     logout(): void 

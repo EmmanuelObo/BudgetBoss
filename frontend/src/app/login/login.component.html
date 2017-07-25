@@ -3,7 +3,7 @@
     <p>Please login using the form below.</p>
 </div>
 
-<form name="login-form" (ngSubmit)="login(); onSubmit();" #loginForm="ngForm" >
+<form name="login-form" (ngSubmit)="login(); onSubmit(); loginForm.reset();" #loginForm="ngForm" >
     <div class="form-group">
         <label for="name"></label>
         <input class="form-control" type="text" name="username" id="name" [(ngModel)]="model.username" required #name />

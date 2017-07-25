@@ -22,6 +22,12 @@ class UserResource(ModelResource):
         }
         authentication = BasicAuthentication()
 
+    def alter_list_data_to_serialize(self, request, data):
+        if request.GET.get('object_only'):
+            return {'objects': data['objects']}
+
+        return data
+
 class CategoryResource(ModelResource):
     user = fields.ToOneField(UserResource, 'owner')
     lists = fields.ToManyField('app.api.resources.ListResource','list_set', related_name='list')

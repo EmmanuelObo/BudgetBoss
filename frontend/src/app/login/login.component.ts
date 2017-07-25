@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from '../_models/index';
 import { AuthenticationService } from '../_services/index';
+import { Response} from '@angular/http';
 
 @Component({
     selector: 'app-login',
@@ -18,10 +19,10 @@ export class LoginComponent{
 
     login()
     {
-        this.auth.login(this.model.username,this.model.password).subscribe(
+        this.auth.login(this.model.username,this.model.password)
+        .subscribe(
             data => {
-                this.isAuthenticated = true
-                localStorage.setItem('loggedinUser',JSON.stringify(data));
+               this.isAuthenticated = true;
             },
             err => console.log(err.text()),
             () => console.log('Request Complete'));
