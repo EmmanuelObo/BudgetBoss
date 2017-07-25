@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from tastypie import fields
 from tastypie.authentication import BasicAuthentication
-from tastypie.authorization import Authorization
+from tastypie.authorization import Authorization, DjangoAuthorization
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from lists.models import List
 from items.models import Item
@@ -47,7 +47,7 @@ class ListResource(ModelResource):
 
     class Meta:
         queryset = List.objects.all()
-        authorization = Authorization()
+        authorization = DjangoAuthorization()
         resource_name = 'list'
         filtering = {
             'owner': ALL_WITH_RELATIONS,

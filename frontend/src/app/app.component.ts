@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
     private listService: ListService) { }
   data: any;
   title: string = 'Budget.Boss';
-  appTitle = 'app-title container';
+  appTitle = 'app-title';
   arr = [];
 
   mylist:List;

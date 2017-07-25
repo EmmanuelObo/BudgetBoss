@@ -16,7 +16,9 @@ export class AuthenticationService{
         this.headers.set('Content-Type', "application/x-www-form-urlencoded");
         this.headers.set('Authorization', 'Basic ' + btoa(username + ":" + password));
 
-        return this.http.get('http://127.0.0.1:8000/api/v1/user/?objects_only=true', {headers: this.headers})
+        let url:string = 'http://127.0.0.1:8000/api/v1/user/?objects_only=true';
+
+        return this.http.get(url, {headers: this.headers})
         .map((response: Response)=>{
             console.log('Response (not parsed): ' + response.json())
             let body: Object = JSON.parse(response['_body']);

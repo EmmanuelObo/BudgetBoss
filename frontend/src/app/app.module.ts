@@ -7,10 +7,23 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
 import { AuthenticationService } from "./_services/index";
 
+import { AuthGuard } from './_guards/index';
+
+
 const appRoutes: Routes = [
+  {
+    path: '',
+    component: AppComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
   {
     path: 'login',
     component: LoginComponent
@@ -20,7 +33,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +43,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthenticationService],
-  bootstrap: [AppComponent, LoginComponent]
+  providers: [AuthenticationService, AuthGuard],
+  bootstrap: [AppComponent, LoginComponent, HomeComponent]
 })
 export class AppModule { }

@@ -1,40 +1,34 @@
-<div>
-    <h1>Login</h1>
-    <p>Please login using the form below.</p>
+<div class="container col-md-5">
+    <div>
+        <h1>Login</h1>
+        <p>Please login using the form below.</p>
+    </div>
+
+    <form name="login-form" (ngSubmit)="login(); onSubmit(); loginForm.reset();" #loginForm="ngForm" >
+        <div class="form-group">
+            <label for="name"></label>
+            <input class="form-control" type="text" name="username" id="name" [(ngModel)]="model.username" required #name />
+        </div>
+            
+        <div [hidden]="!submitted && !isAuthenticated" 
+            class="alert alert-danger" >
+            Username is required!
+        </div>
+
+        <div class="form-group">
+            <label for="pass"></label>
+            <input class="form-control" type="password" name="password" id="pass" [(ngModel)]="model.password" required #pass />
+        </div>
+
+        <div [hidden]="!submitted && !isAuthenticated" 
+            class="alert alert-danger" >
+            Password is required!
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+
+    <div *ngIf="isAuthenticated">
+        <strong>LOGGED IN!</strong>
+    </div>
 </div>
-
-<form name="login-form" (ngSubmit)="login(); onSubmit(); loginForm.reset();" #loginForm="ngForm" >
-    <div class="form-group">
-        <label for="name"></label>
-        <input class="form-control" type="text" name="username" id="name" [(ngModel)]="model.username" required #name />
-    </div>
-        
-    <div [hidden]="!submitted && !isAuthenticated" 
-        class="alert alert-danger" >
-        Username is required!
-    </div>
-
-    <div class="form-group">
-        <label for="pass"></label>
-        <input class="form-control" type="password" name="password" id="pass" [(ngModel)]="model.password" required #pass />
-    </div>
-
-    <div [hidden]="!submitted && !isAuthenticated" 
-        class="alert alert-danger" >
-        Password is required!
-    </div>
-
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
-
-
-<div *ngIf="isAuthenticated">
-    <strong>LOGGED IN!</strong>
-</div>
-
-
-<!--TODO: Finish creating form
-1. Add ngModel to both username & password fields
-2. Look into how Angular forms submit via button
-3. Attach Authentication Service
--->
