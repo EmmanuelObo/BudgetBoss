@@ -9,7 +9,7 @@ from categories.models import Category
 
 
 class UserResource(ModelResource):
-    category = fields.ToManyField('app.api.resources.CategoryResource', 'category_set', related_name='category')
+    category = fields.ToManyField('app.api.resources.CategoryResource', 'category_set', related_name='category', null=True)
 
     class Meta:
         queryset = User.objects.all()
@@ -29,8 +29,8 @@ class UserResource(ModelResource):
         return data
 
 class CategoryResource(ModelResource):
-    user = fields.ToOneField(UserResource, 'owner')
-    lists = fields.ToManyField('app.api.resources.ListResource','list_set', related_name='list')
+    user = fields.ToOneField(UserResource, 'owner', null=True)
+    lists = fields.ToManyField('app.api.resources.ListResource','list_set', related_name='list', null=True)
 
     class Meta:
         queryset = Category.objects.all()
@@ -41,21 +41,32 @@ class CategoryResource(ModelResource):
         }
 
 class ListResource(ModelResource):
-    user = fields.ForeignKey(UserResource, 'owner')
-    category = fields.ToOneField(CategoryResource, 'category')
-    item = fields.ToManyField('app.api.resources.ItemResource', 'item_set', related_name='item')
+    user = fields.ForeignKey(UserResource, 'owner', null=True)
+    category = fields.ToOneField(CategoryResource, 'category', null=True)
+    item = fields.ToManyField('app.api.resources.ItemResource', 'item_set', related_name='item', null=True)
 
     class Meta:
         queryset = List.objects.all()
-        authorization = DjangoAuthorization()
+        authorization = Authorization()
         resource_name = 'list'
         filtering = {
             'owner': ALL_WITH_RELATIONS,
             'category': ALL_WITH_RELATIONS,
         }
 
+    # def dehydrate_category(self, bundle):
+    #     category_id =  int(bundle.data['category'].split('/')[4])
+    #     bundle.data['category'] = category_id
+    #     return bundle.data['category']
+    #
+    # def dehydrate_limit(self, bundle):
+    #     if bundle.data['limit'] is None :
+    #         return
+    #
+    #     return float(bundle.data['limit'])
+
 class ItemResource(ModelResource):
-    list = fields.ToOneField(ListResource, 'list')
+    list = fields.ToOneField(ListResource, 'list', null=True)
 
     class Meta:
         queryset = Item.objects.all()

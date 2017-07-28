@@ -31,12 +31,14 @@ export class AppComponent implements OnInit {
     this.mylist = this.listService.update(title,+limit,this.mylist);
   }
 
-  calculations(input: any) {
+  calculations(input: any) 
+  {
     this.arr.push(this.calc.addFive(+input));
   }
 
-  getData() {
-    this.http.get('http://ip.jsontest.com/').subscribe(data => {
+  getData() 
+  {
+      this.http.get('http://ip.jsontest.com/').subscribe(data => {
       this.data = data['ip'];
     });
   }

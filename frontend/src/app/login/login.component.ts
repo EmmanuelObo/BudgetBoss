@@ -3,6 +3,7 @@ import { User } from '../_models/index';
 import { AuthenticationService } from '../_services/index';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
+import { homePath } from '../_constants/index';
 
 @Component({
     selector: 'app-login',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent{
     model: any = {};
     isAuthenticated: boolean = false; 
-    submitted:boolean = false;
+    submitted: boolean = false;
     user: any;
 
     constructor(private auth: AuthenticationService, private router: Router){}
@@ -24,7 +25,7 @@ export class LoginComponent{
         .subscribe(
             data => {
                this.isAuthenticated = true;
-               this.router.navigate(['/home']);
+               this.router.navigate([homePath]);
             },
             err => console.log(err.text()),
             () => console.log('Request Complete'));
