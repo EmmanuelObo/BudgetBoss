@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { host } from '../_constants/index';
+import { host, userURI } from '../_constants/index';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -17,7 +17,7 @@ export class AuthenticationService{
         this.headers.set('Content-Type', "application/x-www-form-urlencoded");
         this.headers.set('Authorization', 'Basic ' + btoa(username + ":" + password));
 
-        let url:string = host + 'api/v1/user/';
+        let url:string = host + userURI;
 
         return this.http.get(url, {headers: this.headers})
         .map((response: Response)=>{

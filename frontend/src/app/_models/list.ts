@@ -1,12 +1,13 @@
-import { Item } from '../_models/item';
-import { Category } from '../_models/category';
+import { Item, Category } from '../_models/index';
 
 export class List {
-    constructor(private listtitle:string){}
-    id: number;
-    title: string = this.listtitle;
-    limit: number;
-    dateCreated: string;
-    items: Array<Item>;
-    category: Category;
+    constructor(
+    public id: number,
+    public title: string,
+    public limit: number,
+    public dateCreated: string,
+    public items: Array<Item>,
+    public total: number,
+    public itemCount: number,
+    public category: Category){}
 }

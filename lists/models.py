@@ -10,8 +10,8 @@ class List(models.Model):
     '''
     title = models.CharField(max_length=20, default='Empty',
                              null=True, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     dateCreated = models.DateTimeField(default=datetime.now, blank=True)
     limit = models.DecimalField(decimal_places=2, max_digits=100, default=None, null=True, blank=True)
 

@@ -1,6 +1,9 @@
+import { Priority } from '../_constants/index';
+
 export class Item {
-    id: number;
-    name: string;
-    price: number;
-    priority: string;
+    constructor(
+    public id: number,
+    public name: string,
+    public price: number,
+    public priority: Priority){}
 }

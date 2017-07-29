@@ -1,4 +1,9 @@
 export class Category{
-    id: number;
-    title: string;
+    constructor(
+        public id: number,
+        public title: string,
+        public owner: [number,string],
+        public total: number,
+        public listCount: number
+    ){}
 }

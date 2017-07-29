@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { List } from '../_models/list';
 import { HttpClient } from '@angular/common/http';
+import { host, listURI, categoryURI, userURI } from '../_constants/index';
 
 
 @Injectable()
@@ -9,20 +10,23 @@ export class ListService {
     create(title: string, limit:string) 
     {
 
-        let url:string = 'http://127.0.0.1:8000/api/v1/list/'; 
-        let data:string = JSON.stringify({"category": "/api/v1/category/4/",
+        let url:string = host + listURI; 
+        let data:string = JSON.stringify({"category": "/" + categoryURI + "4/",
             "limit": (limit == '' ? '': limit),
             "title": title,
-            "user": "/api/v1/owner/1/"});
+            "user": userURI});
         let body:JSON = JSON.parse(data);
         this.http.post(url, body).subscribe(data=>{
             console.log('New List: ' + title + ' has been created.');
         });
     }
 
-    destroy() 
+    destroy(id: string) 
     {
-
+        let url: string = host + listURI + id;
+        this.http.delete(url, data=>{
+            console.log('List deleted')
+        })
     }
 
     update(title: string,
