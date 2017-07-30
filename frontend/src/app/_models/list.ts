@@ -6,7 +6,7 @@ export class List {
     public title: string,
     public limit: number,
     public dateCreated: string,
-    public items: Array<Item>,
+    public items: Item[],
     public total: number,
     public itemCount: number,
     public category: Category){}

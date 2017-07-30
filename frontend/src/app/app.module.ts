@@ -9,8 +9,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { CreateListComponent } from './list/createlist.component';
 
-import { AuthenticationService } from "./_services/index";
+import { AuthenticationService, ItemService, ListService } from "./_services/index";
 
 import { AuthGuard } from './_guards/index';
 
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    CreateListComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthenticationService, AuthGuard],
-  bootstrap: [AppComponent, LoginComponent, HomeComponent]
+  providers: [AuthenticationService, ItemService, ListService, AuthGuard],
+  bootstrap: [AppComponent, LoginComponent, HomeComponent, CreateListComponent]
 })
 export class AppModule { }

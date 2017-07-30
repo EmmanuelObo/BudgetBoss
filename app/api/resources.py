@@ -87,7 +87,7 @@ class ItemResource(ModelResource):
         authorization = Authorization()
         resource_name = 'item'
         filtering = {
-            'list': ALL_WITH_RELATIONS,  `
+            'list': ALL_WITH_RELATIONS,  
         }
 
     def dehydrate(self, bundle):

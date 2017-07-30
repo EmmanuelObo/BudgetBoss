@@ -4,6 +4,6 @@ export class Item {
     constructor(
     public id: number,
     public name: string,
-    public price: number,
+    public cost: number,
     public priority: Priority){}
 }
