@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { CreateListComponent } from './list/createlist.component';
+import { ListDetailsComponent } from "./list/listdetails.component";
 
 import { AuthenticationService, ItemService, ListService } from "./_services/index";
 
@@ -37,7 +38,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    CreateListComponent
+    CreateListComponent,
+    ListDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +49,6 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [AuthenticationService, ItemService, ListService, AuthGuard],
-  bootstrap: [AppComponent, LoginComponent, HomeComponent, CreateListComponent]
+  bootstrap: [AppComponent, LoginComponent, HomeComponent, CreateListComponent, ListDetailsComponent]
 })
 export class AppModule { }

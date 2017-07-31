@@ -38,7 +38,7 @@ export class ItemService{
                                     item.cost,
                                     item.priority))
             })
-        }).unsubscribe();
+        })
         return items
     }
 
