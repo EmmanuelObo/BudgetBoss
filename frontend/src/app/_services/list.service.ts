@@ -7,17 +7,15 @@ import { host, listURI, categoryURI, userURI } from '../_constants/index';
 @Injectable()
 export class ListService {
     constructor(private http: HttpClient) { }
-    create(title: string, limit:string) 
+    create(body:Object) 
     {
-
+        //body = JSON.stringify(body)
         let url:string = host + listURI; 
-        let data:string = JSON.stringify({"category": "/" + categoryURI + "4/",
-            "limit": (limit == '' ? '': limit),
-            "title": title,
-            "user": userURI});
-        let body:JSON = JSON.parse(data);
         this.http.post(url, body).subscribe(data=>{
-            console.log('New List: ' + title + ' has been created.');
+            console.log('New List: ' + body["title"] + ' has been created.');
+        },
+        error=>{
+            console.log(body);
         });
     }
 

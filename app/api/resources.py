@@ -10,8 +10,9 @@ from categories.models import Category
 
 
 class UserResource(ModelResource):
-    category = fields.ToManyField('app.api.resources.CategoryResource', 'category_set', related_name='category', null=True, blank=True)
-    list = fields.ToManyField('app.api.resources.ListResource', 'list_set', related_name='list')
+    categories = fields.ToManyField('app.api.resources.CategoryResource', 'category_set', related_name='category',
+                                  null=True, blank=True)
+    lists = fields.ToManyField('app.api.resources.ListResource', 'list_set', related_name='list')
 
     class Meta:
         queryset = User.objects.all()
@@ -24,10 +25,10 @@ class UserResource(ModelResource):
         }
         authentication = BasicAuthentication()
 
-        def dehydrate_category(self, bundle):
-            category_id = int(bundle.data['category'].split('/')[4])
-            bundle.data['category'] = category_id
-            return bundle.data['category']
+    def dehydrate_category(self, bundle):
+        category_id = [ int(category.split('/')[4]) for category in bundle.data['categories']] #int(bundle.data['category'].split('/')[4])
+        bundle.data['categories'] = category_id
+        return bundle.data['categories']
 
     def alter_list_data_to_serialize(self, request, data):
         if request.GET.get('object_only'):
@@ -35,9 +36,10 @@ class UserResource(ModelResource):
 
         return data
 
+
 class CategoryResource(ModelResource):
     user = fields.ToOneField(UserResource, 'owner', null=True, blank=True)
-    lists = fields.ToManyField('app.api.resources.ListResource','list_set', related_name='list', null=True)
+    lists = fields.ToManyField('app.api.resources.ListResource', 'list_set', related_name='list', null=True)
 
     class Meta:
         queryset = Category.objects.all()
@@ -46,6 +48,7 @@ class CategoryResource(ModelResource):
         filtering = {
             'user': ALL_WITH_RELATIONS,
         }
+
 
 class ListResource(ModelResource):
     user = fields.ForeignKey(UserResource, 'owner', null=True, blank=True)
@@ -63,11 +66,27 @@ class ListResource(ModelResource):
 
     def dehydrate(self, bundle):
         count = len(bundle.obj.item_set.all())
-        list_count = int(bundle.obj.category.count) if bundle.obj.category.count is not None else 0
-        category_total = float(bundle.obj.category.total) if bundle.obj.category.total is not None else 0
+        total = 0
+        list_count = 0
+        category_total = 0
+        limit = None
 
+        if bundle.obj.category.total is not None or bundle.obj.category.total != 0:
+            category_total = float(bundle.obj.category.total)
+
+        if bundle.obj.category.count is not None or bundle.obj.category.count != 0:
+            list_count = int(bundle.obj.category.count)
+
+        if bundle.obj.total is not None or bundle.obj.total != 0:
+            total = float(bundle.obj.total)
+
+        if bundle.obj.limit is not None:
+            limit = float(bundle.obj.limit)
+
+        bundle.data['dateCreated'] = str(bundle.data['dateCreated']).replace('T', ' ') \
+                                                                    .replace(str(bundle.data['dateCreated'])[19:], '')
         bundle.data['items'] = [x.id for x in bundle.obj.item_set.all()]
-        bundle.data['limit'] = float(bundle.obj.limit)
+        bundle.data['limit'] = limit
         bundle.data['category'] = {'id': bundle.obj.category.id,
                                    'title': bundle.obj.category.title,
                                    'owner': {'id': bundle.obj.category.owner.id,
@@ -75,7 +94,7 @@ class ListResource(ModelResource):
                                    'total': category_total,
                                    'list_count': list_count}
         bundle.data['item_count'] = count
-        bundle.data['total'] = float(bundle.obj.total) if bundle.obj.total is not None else 0
+        bundle.data['total'] = total
         return bundle
 
 
@@ -87,7 +106,7 @@ class ItemResource(ModelResource):
         authorization = Authorization()
         resource_name = 'item'
         filtering = {
-            'list': ALL_WITH_RELATIONS,  
+            'list': ALL_WITH_RELATIONS,
         }
 
     def dehydrate(self, bundle):
@@ -95,4 +114,3 @@ class ItemResource(ModelResource):
         bundle.data['list'] = int(bundle.obj.list.id)
 
         return bundle
-

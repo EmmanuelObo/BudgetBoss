@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { categoryURI, slash } from '../_constants/index';
+import { ListService } from '../_services/index';
 
 @Component({
     selector: 'create-list',
@@ -6,8 +8,10 @@ import { Component } from '@angular/core';
 })
 
 export class CreateListComponent{
-    model: any = {}
-    categories: string[] = ["Groceries", "Bills", "Loans", "Home", "Car"]
+    constructor(private listService: ListService){}
+
+    model: any = {"items":[], "user": "/api/v1/user/1/"}
+    categories: [string,number][] = [["Groceries", 1], ["Bills",2], ["Loans",3], ["Home",4], ["Car",5]]
     hasLimit: boolean = false;
     limitBtnText: string = 'Add Limit'
     limitBtnStyle: string = 'btn btn-primary'
@@ -26,5 +30,12 @@ export class CreateListComponent{
             this.limitBtnText = 'Remove Limit';
             this.limitBtnStyle = 'btn btn-danger';
         }
+    }
+
+    createList()
+    {
+        this.model['category'] = slash + categoryURI + this.model['category'] + slash;
+        console.log(this.model);
+        this.listService.create(this.model);
     }
 }

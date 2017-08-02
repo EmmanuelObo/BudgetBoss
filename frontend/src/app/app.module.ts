@@ -12,26 +12,12 @@ import { HomeComponent } from './home/home.component';
 import { CreateListComponent } from './list/createlist.component';
 import { ListDetailsComponent } from "./list/listdetails.component";
 
+import { appRoutes } from './_constants/routes.constants';
+
 import { AuthenticationService, ItemService, ListService } from "./_services/index";
 
 import { AuthGuard } from './_guards/index';
 
-
-const appRoutes: Routes = [
-  {
-    path: '',
-    component: AppComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  }
-]
 
 @NgModule({
   declarations: [
@@ -49,6 +35,6 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [AuthenticationService, ItemService, ListService, AuthGuard],
-  bootstrap: [AppComponent, LoginComponent, HomeComponent, CreateListComponent, ListDetailsComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
