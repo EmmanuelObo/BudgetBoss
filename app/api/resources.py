@@ -8,6 +8,8 @@ from lists.models import List
 from items.models import Item
 from categories.models import Category
 
+import json
+
 
 class UserResource(ModelResource):
     categories = fields.ToManyField('app.api.resources.CategoryResource', 'category_set', related_name='category',
@@ -25,10 +27,32 @@ class UserResource(ModelResource):
         }
         authentication = BasicAuthentication()
 
-    def dehydrate_category(self, bundle):
-        category_id = [ int(category.split('/')[4]) for category in bundle.data['categories']] #int(bundle.data['category'].split('/')[4])
-        bundle.data['categories'] = category_id
-        return bundle.data['categories']
+
+    def dehydrate(self, bundle):
+        bundle.data['categories'] = [{'id': category.id,
+                                      'title': category.title,
+                                      'total': float(category.total),
+                                      'list_count': int(category.count),
+                                      'user': bundle.obj.username} for category in bundle.obj.category_set.all()]
+
+        bundle.data['lists'] = [ {'id': userlist.id,
+                                  'title': userlist.title,
+                                  'limit': float(userlist.limit) if userlist.limit is not None else None,
+                                  'date_created': userlist.dateCreated,
+                                  'total': float(userlist.total) if userlist.total is not None else 0,
+                                  'item_count': int(userlist.count) if userlist.count is not None else 0,
+                                  'items': [ {'id': item.id,
+                                              'name': item.name,
+                                              'cost': float(item.cost) if item.cost is not None else 0,
+                                              'priority': item.priority} for item in userlist.item_set.all()],
+                                  'category': {'id': userlist.category.id,
+                                               'title': userlist.category.title,
+                                               'total': float(userlist.category.total) if userlist.category.total is not None else 0,
+                                               'list_count': userlist.category.count,
+                                               'user': bundle.obj.username}} for userlist in bundle.obj.list_set.all()]
+
+        return bundle
+
 
     def alter_list_data_to_serialize(self, request, data):
         if request.GET.get('object_only'):
@@ -48,6 +72,14 @@ class CategoryResource(ModelResource):
         filtering = {
             'user': ALL_WITH_RELATIONS,
         }
+
+    def dehydrate(self, bundle):
+        bundle.data['list_count'] = int(bundle.obj.count)
+        bundle.data['total'] = float(bundle.obj.total) if bundle.obj.total is not None else 0
+
+        bundle.data['user'] = {'id': bundle.obj.owner.id,
+                               'username': bundle.obj.owner.username}
+        return bundle
 
 
 class ListResource(ModelResource):

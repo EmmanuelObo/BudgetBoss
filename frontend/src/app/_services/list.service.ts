@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { List } from '../_models/list';
+import { List, Category, Item } from '../_models';
 import { HttpClient } from '@angular/common/http';
-import { host, listURI, categoryURI, userURI } from '../_constants/index';
+import {ItemService } from '../_services/index';
+import { host, listURI, categoryURI, userURI, slash } from '../_constants/index';
 
 
 @Injectable()
 export class ListService {
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private itemService: ItemService) { }
     create(body:Object) 
     {
         //body = JSON.stringify(body)
@@ -37,17 +38,21 @@ export class ListService {
         return currList;
     }
 
-    get(id:string):void
+    get(id)
     {
-        let url:string = 'http://127.0.0.1:8000/api/v1/list/'+id+'/';
-        this.http.get(url).subscribe(data=>{
-            let response = data;
-            let body:string = 'List ID: ' + response['id'] + '\n'
-                      +  'List Title: ' + response['title'] + '\n'
-                      + 'List Limit: ' + 
-                      (response['limit'] == null ? 'N/A' : '$' + response['limit']);
-            console.log(body);
-        });
+        let url:string = host + listURI + id + slash;
+        return this.http.get(url);
+    }
+
+    convert():List[]
+    {
+        let lists: List[];
+
+        lists.forEach(element=>{
+
+        })
+
+        return lists;
     }
 
     getAll():void 

@@ -22,7 +22,7 @@ export class ListDetailsComponent{
     fifthItem: Item = new Item(6, 'Keyboard', 70, Priority.LOW);
     
     items: Item[] = [this.firstItem,this.secondItem,this.thirdItem,this.fourthItem,this.fifthItem]
-    currList: List = new List(99, 'Office Supplies', 101.45, '2017-7-30', this.items, 350, 5, new Category(21, 'Home Office', [1, 'manny'], 350, 1));
+    currList: List = new List(99, 'Office Supplies', 101.45, '2017-7-30', this.items, 350, 5, new Category(21, 'Home Office', 'manny', 350, 1));
 
     ngOnInit()
     {

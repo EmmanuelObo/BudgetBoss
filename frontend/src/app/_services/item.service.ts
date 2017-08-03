@@ -11,19 +11,10 @@ export class ItemService{
     url: string = host + itemURI;
     item: Item;
 
-    get(id: number):Item
+    get(id)
     {
-        this.http.get(this.url + id + slash).subscribe(data=>{
-            this.item = new Item(data['id'],
-                                 data['name'],
-                                 data['cost'],
-                                 data['priority']);
-        },
-        error=>{
-            console.error(error);
-            return null;
-        })
-        return this.item;
+        let url:string = host + itemURI + id + slash;
+        return this.http.get(url);
     }
 
     getAll():Item[]

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { User } from '../_models/index';
-import { AuthenticationService } from '../_services/index';
+import { User, List, Category } from '../_models/index';
+import { AuthenticationService, ItemService } from '../_services/index';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { homePath } from '../_constants/index';
@@ -27,7 +27,7 @@ export class LoginComponent{
                this.isAuthenticated = true;
                this.router.navigate([homePath]);
             },
-            err => console.log(err.text()),
+            error => console.log(error),
             () => console.log('Request Complete'));
     }
 

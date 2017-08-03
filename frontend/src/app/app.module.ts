@@ -34,7 +34,7 @@ import { AuthGuard } from './_guards/index';
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthenticationService, ItemService, ListService, AuthGuard],
+  providers: [ItemService, AuthenticationService, ListService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
