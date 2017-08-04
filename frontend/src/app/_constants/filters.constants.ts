@@ -1,0 +1,1 @@
+export const userid_filter: string = '?user__id=';

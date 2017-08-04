@@ -21,11 +21,6 @@ export class AppComponent implements OnInit {
 
   mylist:List;
 
-  updateList(title:string, limit:string, currList:List)
-  {
-    this.mylist = this.listService.update(title,+limit,this.mylist);
-  }
-
   calculations(input: any) 
   {
     this.arr.push(this.calc.addFive(+input));

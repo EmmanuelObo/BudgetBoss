@@ -2,65 +2,36 @@ import { Injectable } from '@angular/core';
 import { List, Category, Item } from '../_models';
 import { HttpClient } from '@angular/common/http';
 import {ItemService } from '../_services/index';
-import { host, listURI, categoryURI, userURI, slash } from '../_constants/index';
+import { host, listURI, categoryURI, userURI, slash, userid_filter } from '../_constants/index';
 
 
 @Injectable()
 export class ListService {
-    constructor(private http: HttpClient, private itemService: ItemService) { }
-    create(body:Object) 
+    constructor(private http: HttpClient) { }
+
+    create(data) 
     {
-        //body = JSON.stringify(body)
-        let url:string = host + listURI; 
-        this.http.post(url, body).subscribe(data=>{
-            console.log('New List: ' + body["title"] + ' has been created.');
-        },
-        error=>{
-            console.log(body);
-        });
+        return this.http.post(host + listURI + data['id'] + slash, data);
     }
 
-    destroy(id: string) 
+    delete(id) 
     {
-        let url: string = host + listURI + id;
-        this.http.delete(url, data=>{
-            console.log('List deleted')
-        })
+        return this.http.delete(host + listURI + id + slash);
     }
 
-    update(title: string,
-        limit: number, currList: List):List 
+    update(data) 
     {
-        //Later change to HTTP Put Method
-        //to create the new list
-        currList.title = title || currList.title;
-        currList.limit = limit || null;
-        return currList;
+        return this.http.put(host + listURI + data['id'] + slash, data);
     }
 
     get(id)
     {
-        let url:string = host + listURI + id + slash;
-        return this.http.get(url);
+        return this.http.get(host + listURI + id + slash);
     }
 
-    convert():List[]
+    loadAll(_userid) 
     {
-        let lists: List[];
-
-        lists.forEach(element=>{
-
-        })
-
-        return lists;
-    }
-
-    getAll():void 
-    {
-        this.http.get('http://127.0.0.1:8000/api/v1/list/').subscribe(data=>{
-        let response = JSON.stringify(data['objects']);
-        console.log(response);
-        });
+        return this.http.get(host + listURI + userid_filter + _userid);
     }
 
 }

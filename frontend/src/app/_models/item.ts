@@ -5,5 +5,7 @@ export class Item {
     public id: number,
     public name: string,
     public cost: number,
-    public priority: Priority){}
+    public priority: Priority,
+    public listID: number,
+    public note?: string){}
 }

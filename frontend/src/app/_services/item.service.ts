@@ -3,55 +3,29 @@ import { Item } from '../_models/index';
 import { Priority, host, slash, itemURI } from "../_constants/index";
 import { HttpClient } from '@angular/common/http';
 import { Response } from '@angular/http';
-import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ItemService{
     constructor(private http: HttpClient){}
-    url: string = host + itemURI;
-    item: Item;
 
     get(id)
     {
-        let url:string = host + itemURI + id + slash;
-        return this.http.get(url);
+        return this.http.get(host + itemURI + id + slash);
     }
 
-    getAll():Item[]
+    getAll()
     {
-        let data: any = {}
-        var items: Item[] = [];
-        this.http.get(this.url).subscribe(response=>{
-            data = response['objects']
-            data.map(item=>{
-                items.push(new Item(item.id,
-                                    item.name,
-                                    item.cost,
-                                    item.priority))
-            })
-        })
-        return items
+        this.http.get(host + itemURI);
     }
 
-    delete(id: number): boolean
+    delete(id)
     {
-        this.http.delete(this.url + id + slash).subscribe(data=>{
-            return true;
-        },
-        error=>{
-            console.error(error);
-            return false;
-        })
-        return;
+        this.http.delete(host + itemURI + id + slash);
     }
 
-    update(id: number, 
-        name?: string, 
-        cost?: number, 
-        note?: string,
-        priority?: Priority)
+    update(data)
     {
-
+        return this.http.put(host + itemURI + data['id'] + slash, data);
     }
 
     getPriority(priority: string): Priority

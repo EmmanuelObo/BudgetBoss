@@ -16,10 +16,7 @@ export class HomeComponent implements OnInit{
         private router: Router,
         private itemService: ItemService){}
 
-    title: string = 'Home Central';
-    items: Item[];
-    item: Item;
-    mockItem: Item = new Item(102, 'Mock Item', 23.54,Priority.HIGH);
+
 
 
     logout()
@@ -30,7 +27,6 @@ export class HomeComponent implements OnInit{
 
     ngOnInit()
     {
-        this.items = this.itemService.getAll();
-        console.log(this.items);        
+     
     }
 }

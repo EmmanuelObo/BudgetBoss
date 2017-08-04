@@ -8,7 +8,6 @@ from lists.models import List
 from items.models import Item
 from categories.models import Category
 
-import json
 
 
 class UserResource(ModelResource):
@@ -20,10 +19,9 @@ class UserResource(ModelResource):
         queryset = User.objects.all()
         resource_name = 'user'
         excludes = ['email', 'password', 'is_active', 'is_staff', 'is_superuser']
-        # list_allowed_methods = ['get', 'post']
-        # detail_allowed_methods = ['get', 'post']
         filtering = {
-            'username': ALL,
+            'username': ALL_WITH_RELATIONS,
+            'id': ALL_WITH_RELATIONS
         }
         authentication = BasicAuthentication()
 
@@ -35,7 +33,7 @@ class UserResource(ModelResource):
                                       'list_count': int(category.count),
                                       'user': bundle.obj.username} for category in bundle.obj.category_set.all()]
 
-        bundle.data['lists'] = [ {'id': userlist.id,
+        bundle.data['lists'] = [{'id': userlist.id,
                                   'title': userlist.title,
                                   'limit': float(userlist.limit) if userlist.limit is not None else None,
                                   'date_created': userlist.dateCreated,
@@ -71,12 +69,13 @@ class CategoryResource(ModelResource):
         resource_name = 'category'
         filtering = {
             'user': ALL_WITH_RELATIONS,
+            'lists': ALL_WITH_RELATIONS
         }
 
     def dehydrate(self, bundle):
         bundle.data['list_count'] = int(bundle.obj.count)
         bundle.data['total'] = float(bundle.obj.total) if bundle.obj.total is not None else 0
-
+        bundle.data['lists'] = [ {'id': currlist.id, 'title': currlist.title} for currlist in bundle.obj.list_set.all()]
         bundle.data['user'] = {'id': bundle.obj.owner.id,
                                'username': bundle.obj.owner.username}
         return bundle
@@ -84,7 +83,7 @@ class CategoryResource(ModelResource):
 
 class ListResource(ModelResource):
     user = fields.ForeignKey(UserResource, 'owner', null=True, blank=True)
-    category = fields.ToOneField(CategoryResource, 'category', null=True)
+    category = fields.ToOneField(CategoryResource, 'category', null=True, full=True)
     items = fields.ToManyField('app.api.resources.ItemResource', 'item_set', related_name='item')
 
     class Meta:
@@ -92,7 +91,7 @@ class ListResource(ModelResource):
         authorization = Authorization()
         resource_name = 'list'
         filtering = {
-            'owner': ALL_WITH_RELATIONS,
+            'user': ALL_WITH_RELATIONS,
             'category': ALL_WITH_RELATIONS,
         }
 
@@ -117,14 +116,19 @@ class ListResource(ModelResource):
 
         bundle.data['dateCreated'] = str(bundle.data['dateCreated']).replace('T', ' ') \
                                                                     .replace(str(bundle.data['dateCreated'])[19:], '')
-        bundle.data['items'] = [x.id for x in bundle.obj.item_set.all()]
+        bundle.data['items'] = [ {'id': item.id,
+                                  'name': item.name,
+                                  'note': item.note,
+                                  'cost': float(item.cost) if item.cost is not None else 0,
+                                  'priority': item.priority,
+                                  'list': item.list.id} for item in bundle.obj.item_set.all()]
         bundle.data['limit'] = limit
-        bundle.data['category'] = {'id': bundle.obj.category.id,
-                                   'title': bundle.obj.category.title,
-                                   'owner': {'id': bundle.obj.category.owner.id,
-                                             'username': bundle.obj.category.owner.username},
-                                   'total': category_total,
-                                   'list_count': list_count}
+        # bundle.data['category'] = {'id': bundle.obj.category.id,
+        #                            'title': bundle.obj.category.title,
+        #                            'owner': {'id': bundle.obj.category.owner.id,
+        #                                      'username': bundle.obj.category.owner.username},
+        #                            'total': category_total,
+        #                            'list_count': list_count}
         bundle.data['item_count'] = count
         bundle.data['total'] = total
         return bundle

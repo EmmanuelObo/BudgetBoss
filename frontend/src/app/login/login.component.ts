@@ -15,7 +15,8 @@ export class LoginComponent{
     model: any = {};
     isAuthenticated: boolean = false; 
     submitted: boolean = false;
-    user: any;
+    user: User;
+    lists: List[] = [];
 
     constructor(private auth: AuthenticationService, private router: Router){}
 
@@ -24,8 +25,9 @@ export class LoginComponent{
         this.auth.login(this.model.username,this.model.password)
         .subscribe(
             data => {
-               this.isAuthenticated = true;
-               this.router.navigate([homePath]);
+                this.user = JSON.parse(localStorage.getItem('loggedinUser'));
+                this.isAuthenticated = true;
+                this.router.navigate([homePath]);
             },
             error => console.log(error),
             () => console.log('Request Complete'));

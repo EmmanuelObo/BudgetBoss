@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { CreateListComponent } from './list/createlist.component';
 import { ListDetailsComponent } from "./list/listdetails.component";
+import { ListComponent } from "./list/list.component";
 
 import { appRoutes } from './_constants/routes.constants';
 
@@ -25,7 +26,8 @@ import { AuthGuard } from './_guards/index';
     LoginComponent,
     HomeComponent,
     CreateListComponent,
-    ListDetailsComponent
+    ListDetailsComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,

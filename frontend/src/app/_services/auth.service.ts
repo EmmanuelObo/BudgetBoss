@@ -23,11 +23,8 @@ export class AuthenticationService{
 
         return this.http.get(url, {headers: this.headers})
         .map((response: Response)=>{
-            let body: Object = JSON.parse(response['_body']);
-            let data: Object = body['objects'][0];
-            console.log(data);
-            this.user = new User(data['id'],data['username'],this.convertLists(data['lists']),this.convertCategories(data['categories']))
-            console.log(this.user)
+            this.user = response.json()['objects'][0];
+            console.log(this.user);
             localStorage.setItem('loggedinUser', JSON.stringify(this.user));
         });
     }
@@ -37,10 +34,10 @@ export class AuthenticationService{
         let allItems: Item[] = [];
         items.forEach(element=>
         {
-            allItems.push(new Item(element['id'], 
-                                     element['name'], 
-                                     element['cost'], 
-                                     this.getPriority(element['priority'])))
+            // allItems.push(new Item(element['id'], 
+            //                          element['name'], 
+            //                          element['cost'], 
+            //                          this.getPriority(element['priority'])))
         })
         return allItems;
     }

@@ -1,0 +1,14 @@
+<div>
+    <h1 style="font-size: 25px;">{{user.username}}'s Lists!</h1>
+</div>
+
+
+<div class="card" style="width: 36rem; margin-bottom: 10px;" *ngFor="let list of lists">
+    <div class="card-header">{{list.title}}</div>
+    <div class="card-block">
+    <h4 class="card-title"> <b>{{list.item_count}}</b> Items </h4>
+    <p class="card-text">Total: ${{list.total}} </p>
+    <a [routerLink]="[routeList,list.id]" class="btn btn-primary">Go to List</a>
+    <a (click)="deleteList(list.id);" class="btn btn-danger" style="color: white;cursor: pointer;">Delete List</a>
+  </div>
+</div>
