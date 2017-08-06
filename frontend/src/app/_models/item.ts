@@ -1,11 +1,11 @@
 import { Priority } from '../_constants/index';
 
 export class Item {
-    constructor(
+    constructor( 
     public id: number,
     public name: string,
     public cost: number,
     public priority: Priority,
-    public listID: number,
+    public list_id: number,
     public note?: string){}
 }

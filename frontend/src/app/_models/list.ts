@@ -5,9 +5,9 @@ export class List {
     public id: number,
     public title: string,
     public limit: number,
-    public dateCreated: string,
+    public date_created: string,
     public items: Item[],
     public total: number,
-    public itemCount: number,
+    public item_count: number,
     public category: Category){}
 }

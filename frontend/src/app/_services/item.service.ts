@@ -20,7 +20,7 @@ export class ItemService{
 
     delete(id)
     {
-        this.http.delete(host + itemURI + id + slash);
+        return this.http.delete(host + itemURI + id + slash);
     }
 
     update(data)

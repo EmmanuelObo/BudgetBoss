@@ -4,6 +4,6 @@ export class Category{
         public title: string,
         public user: string,
         public total?: number,
-        public listCount?: number
+        public list_count?: number
     ){}
 }

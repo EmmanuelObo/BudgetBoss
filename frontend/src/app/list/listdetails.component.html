@@ -2,6 +2,12 @@
 
 <div>
     <ul *ngFor="let item of list.items">
-        <li>{{item.name}} : ${{item.cost}} </li>
+        <li>{{item.name}} : ${{item.cost}} ({{item.priority}}) <a (click)="deleteItem(item.id);" class="btn btn-danger">Delete</a> </li>
     </ul>
+</div>
+
+<div>
+    <button (click)="goBack();" class="btn btn-primary" >
+        Back
+    </button>
 </div>
