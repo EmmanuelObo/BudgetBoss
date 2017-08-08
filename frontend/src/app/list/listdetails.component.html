@@ -1,10 +1,22 @@
 <h1> {{list.title}} </h1>
 
-<div>
-    <ul *ngFor="let item of list.items">
-        <li>{{item.name}} : ${{item.cost}} ({{item.priority}}) <a (click)="deleteItem(item.id);" class="btn btn-danger">Delete</a> </li>
-    </ul>
+
+<div class="card" *ngFor="let item of list.items" [style.border-left-style]="solid"
+                                                  [style.border-left-width.px]="9"
+                                                  [style.border-left-color]="setStyling(item.priority)"
+                                                  [style.margin-bottom.px]="15"
+                                                  [style.margin-top.px]="10"
+                                                  style="box-shadow: black 1px 1px 1px 0px; 
+                                                  border: 0px solid white" >
+  <div class="card-block">
+    {{item.name}} 
+    <span class="badge badge-default"> ${{item.cost}} </span>
+    <button class="btn btn-outline-primary btn-sm" (click)="toggleNotes();">Notes</button>
+    <small [hidden]="showNotes" style="position: absolute;display: grid;margin-left: 154px;"> {{item.note}} </small>
+    <a (click)="deleteItem(item.id);" style="color: white;cursor:pointer;float: right;" class="btn btn-danger">Delete</a>
+  </div>
 </div>
+    
 
 <div>
     <button (click)="goBack();" class="btn btn-primary" >

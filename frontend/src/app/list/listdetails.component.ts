@@ -3,10 +3,13 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ItemService, ListService } from '../_services/index';
 import { List, Item, Category } from '../_models/index';
 import { Priority } from "../_constants/index";
+import { fadeInAnimation } from "../_animations/index";
 
 @Component({
     selector: 'list-details',
-    templateUrl: 'listdetails.component.html'
+    templateUrl: 'listdetails.component.html',
+    animations: [fadeInAnimation],
+    host: { '[@fadeInAnimation]': '' }
 })
 
 export class ListDetailsComponent{
@@ -16,6 +19,8 @@ export class ListDetailsComponent{
     id: string;
     list: List;
     items: Item[] = [];
+    priorityStyle: string = "border-left-color: #e41e1b;border-left-style: solid; border-left-width: 9px;";
+    showNotes:boolean = true;
     constructor(private route: ActivatedRoute, private listService: ListService, private itemService: ItemService){}
 
     ngOnInit()
@@ -47,5 +52,28 @@ export class ListDetailsComponent{
     goBack()
     {
         window.history.back();
+    }
+
+    setStyling(priority)
+    {
+        if(priority == 'HIGH')
+            {
+                return "#e41e1b";
+            }
+
+        if(priority == 'MEDIUM')
+            {
+                return "#f9f507";
+            }
+
+        if(priority == 'LOW')
+            {
+                return "#d4d4d4";
+            }
+    }
+
+    toggleNotes()
+    {
+        this.showNotes = this.showNotes ? false : true;
     }
 }
