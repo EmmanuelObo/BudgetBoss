@@ -1,11 +1,31 @@
-<div style="text-align: center;">
-  <h1 [class]="appTitle">
-    < {{title}} />
-  </h1>
+<header>
+  <div class="header" style="text-align: center;">
+    <h1 [class]="appTitle">
+      < {{title}} />
+    </h1>
+  </div>
+</header>
+
+<div class="sidebar sidebar-nav">
+  <div class="sidebar-header">
+    Navigator
+  </div>
+  <div class="sidebar-body">
+    <ul style="padding: 0px;">
+      <li class="sidebar-menu-item">Home</li>
+      <li class="sidebar-menu-item">Lists</li>
+      <li class="sidebar-menu-item">Category</li>
+      <li class="sidebar-menu-item">Settings</li>
+    </ul>
+  </div>
 </div>
 
-
-<div style="width:570px;margin: 10% 0px 0px 29%;text-align:center">
+<div class="main-container" style="width:570px;margin: 10% 0px 0px 29%;text-align:center">
   <router-outlet></router-outlet>
 </div> 
+
+
+<footer class="footer">
+  Budget Boss
+</footer>
   
