@@ -8,6 +8,11 @@ import { Response } from '@angular/http';
 export class ItemService{
     constructor(private http: HttpClient){}
 
+    create(data)
+    {
+        return this.http.post(host + itemURI,data);
+    }
+
     get(id)
     {
         return this.http.get(host + itemURI + id + slash);
@@ -27,6 +32,7 @@ export class ItemService{
     {
         return this.http.put(host + itemURI + data['id'] + slash, data);
     }
+
 
     getPriority(priority: string): Priority
     {

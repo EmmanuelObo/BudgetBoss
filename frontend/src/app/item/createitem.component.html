@@ -1,0 +1,41 @@
+<div class="new-item-container">
+    <form (ngSubmit)="createItem(); itemForm.reset();" #itemForm="ngForm" >
+
+        <div class="form-group col-md-8">
+            <label for="item-name">Name:</label>
+            <input class="form-control" type="text" id="item-name" name="name" [(ngModel)]="model.name" required>
+        </div>
+
+        <div class="form-group col-md-8">
+            <label for="cost">Cost: </label>
+            <input class="form-control" type="number" name="cost" [(ngModel)]="model.cost" >
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="priority">Priority:</label>
+            <select class="form-control" 
+                    name="priority" 
+                    id="item-priority" 
+                    [(ngModel)]="model.priority">
+                <option *ngFor="let priority of priorities" name="priority" value={{priority}}>{{priority}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button type="button" (click)="toggleNotes();" class="btn btn-outline-primary"> {{notesBtnTxt}} </button>
+        </div>
+
+        <div *ngIf="hasNotes" class="form-group">
+            <label for="item-notes">Notes: </label>
+            <input type="text" id="item-notes" class="form-control" name="notes" [(ngModel)]="model.notes" >
+        </div>
+        <button type="submit" class="btn btn-primary" >Create</button>
+    </form>
+</div>
+
+<!--TODO:
+1. Make Form Inline.
+2. Don't reload page after new item created. Instead find a way to reload the items (like how it is done in listdetails.component.ts).
+3. Create a toggle button for adding new items.
+4. Add styiling and animations to 'New Item' form.
+-->

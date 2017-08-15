@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { CreateListComponent } from './list/createlist.component';
 import { ListDetailsComponent } from "./list/listdetails.component";
 import { ListComponent } from "./list/list.component";
+import { CreateItemComponent } from "./item/createitem.component";
 
 import { appRoutes } from './_constants/routes.constants';
 
@@ -28,7 +29,8 @@ import { AuthGuard } from './_guards/index';
     HomeComponent,
     CreateListComponent,
     ListDetailsComponent,
-    ListComponent
+    ListComponent,
+    CreateItemComponent
   ],
   imports: [
     BrowserModule,

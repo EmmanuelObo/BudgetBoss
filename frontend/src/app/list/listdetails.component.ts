@@ -41,12 +41,21 @@ export class ListDetailsComponent{
 
     deleteItem(id: string)
     {
-        this.itemService.delete(id).subscribe(()=>{this.loadLists()});
+        this.itemService.delete(id).subscribe(()=>{this.loadItems()});
     }
 
-    loadLists()
+    loadItems()
     {
-        this.listService.get(this.id).subscribe(data=>{this.list = <List>data;})
+        this.listService.get(this.id).subscribe(data=>
+            {
+                this.list = <List>data;
+                this.list['items'] = this.list['items'].sort((a,b)=>
+                {
+                    let first = this.itemService.getPriority(a.priority.toString())
+                    let second = this.itemService.getPriority(b.priority.toString())
+                    return second-first
+                })
+            })
     }
 
     goBack()
