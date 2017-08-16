@@ -3,7 +3,7 @@
 .header{
     margin-bottom:65px;
     text-align: left;
-    border-bottom: 2px solid rgba(228, 228, 228, 0.32);
+    border-bottom: 2px solid black;
     background: rgb(59, 172, 218);
     padding-bottom: 4px;
     padding-top: 3px;
@@ -14,7 +14,7 @@
     font-family: 'Exo', Arial, Helvetica, sans-serif;
     color: rgba(232, 255, 236, 1);
     font-size: 35px;
-    margin: 0px 0px 0px 15px;
+    margin: 0px 0px 0px -55px;
 }
 
 .container{
@@ -56,11 +56,15 @@
 
 .sidenav{
     float: left;
-    border-right: 1px solid;
+    border-right: 2px solid;
     height: 2000px;
     position: static;
-    /* z-index: 2000; */
     margin: -65px 0px 0px 0px;
     top: 47px;
-    background: hsl(205, 79%, 65%);
+    background: rgb(59, 172, 218);
+}
+
+ul{
+    color: rgba(232, 255, 236, 1);
+    font-weight: bold;
 }

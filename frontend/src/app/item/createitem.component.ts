@@ -6,7 +6,8 @@ import { Params, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'create-item',
-    templateUrl: 'createitem.component.html'
+    templateUrl: 'createitem.component.html',
+    styleUrls: ['createitem.component.css']
 })
 
 

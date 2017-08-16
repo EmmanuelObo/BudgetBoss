@@ -22,6 +22,11 @@
     <button (click)="goBack();" class="btn btn-primary" >
         Back
     </button>
+    <button (click)="toggleNewItem()" class="btn btn-success">New Item</button>
 </div>
 
+
+
+<div style="margin:2rem;" *ngIf="hasNewItem">
 <create-item></create-item>
+</div>

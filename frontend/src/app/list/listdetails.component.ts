@@ -21,6 +21,7 @@ export class ListDetailsComponent{
     items: Item[] = [];
     priorityStyle: string = "border-left-color: #e41e1b;border-left-style: solid; border-left-width: 9px;";
     showNotes:boolean = true;
+    hasNewItem:boolean = false;
     constructor(private route: ActivatedRoute, private listService: ListService, private itemService: ItemService){}
 
     ngOnInit()
@@ -84,5 +85,10 @@ export class ListDetailsComponent{
     toggleNotes()
     {
         this.showNotes = this.showNotes ? false : true;
+    }
+
+    toggleNewItem()
+    {
+        this.hasNewItem = this.hasNewItem ? false : true;
     }
 }

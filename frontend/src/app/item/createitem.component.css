@@ -1,0 +1,22 @@
+
+.new-item-container{
+    background: white;
+    border-radius: 5px;
+    border: .5px dashed;
+    margin: auto 50px;
+}
+
+.notes{
+    margin-top: 0px;margin-bottom: 0px;
+    height: 87px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+form{
+    margin: 40px 0px 30px 53px;
+}
+
+.btn{
+    cursor: pointer;
+}
