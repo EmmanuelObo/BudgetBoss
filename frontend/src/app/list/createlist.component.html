@@ -3,7 +3,7 @@
 </div>
 
 <div class="jumbotron">
-    <form (ngSubmit)="createList(); listForm.reset();" #listForm="ngForm">
+    <form (ngSubmit)="createList(); listForm.reset(); getLoadedItems();" #listForm="ngForm">
         <div class="form-group">
             <label>Title:</label>
             <input class="form-control" type="text" name="title" [(ngModel)]="model.title" >

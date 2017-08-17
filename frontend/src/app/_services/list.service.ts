@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { List, Category, Item } from '../_models';
 import { HttpClient } from '@angular/common/http';
 import {ItemService } from '../_services/index';
-import { host, listURI, categoryURI, userURI, slash, userid_filter } from '../_constants/index';
+import { host, listURI, listExport, categoryURI, userURI, slash, userid_filter } from '../_constants/index';
 
 
 @Injectable()
@@ -27,6 +27,11 @@ export class ListService {
     get(id)
     {
         return this.http.get(host + listURI + id + slash);
+    }
+
+    export(id)
+    {
+         window.location.href = host + listExport + id;
     }
 
     loadAll(_userid) 

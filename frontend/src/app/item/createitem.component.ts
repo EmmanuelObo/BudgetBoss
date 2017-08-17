@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Item, List } from '../_models/index';
 import { ItemService, ListService } from '../_services/index';
 import { slash, host, itemURI, listURI, Priority } from '../_constants/index';
@@ -12,13 +12,15 @@ import { Params, ActivatedRoute } from '@angular/router';
 
 
 export class CreateItemComponent{
-    id:number;
+ 
     priorities: string[] = ["HIGH", "MEDIUM", "LOW"]
+    @Input() loadItems;
+    @Input() id;
+    @Output() onListLoad = new EventEmitter();
 
 
     constructor(private route: ActivatedRoute, private itemService: ItemService)
     {
-        route.params.subscribe((param: Params)=>{this.id = param['id']})
         console.log(this.id)
     }
 
@@ -30,7 +32,6 @@ export class CreateItemComponent{
     {
         this.model['list'] = host + listURI + this.id + slash;
         this.itemService.create(this.model).subscribe(data=>{console.log('Item: ' + this.model['name'] + ' created.')}, error=>{console.log(error)})
-        location.reload();
         console.log(this.model);
     }
 
@@ -40,6 +41,11 @@ export class CreateItemComponent{
 
         if(!this.hasNotes) {   this.notesBtnTxt = "Add Notes";     }
         else {   this.notesBtnTxt = "Remove Notes"    }
+    }
+
+    getLoadedItems()
+    {
+        this.onListLoad.emit();
     }
 
 }

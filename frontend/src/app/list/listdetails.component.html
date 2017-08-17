@@ -19,14 +19,14 @@
     
 
 <div>
-    <button (click)="goBack();" class="btn btn-primary" >
+    <button md-raised-button (click)="goBack();" class="btn btn-primary" >
         Back
     </button>
-    <button (click)="toggleNewItem()" class="btn btn-success">New Item</button>
+    <button md-raised-button (click)="export();" class="btn btn-warning" >Export</button>
+    <button md-raised-button (click)="toggleState()" class="btn btn-success">New</button>
 </div>
 
 
-
-<div style="margin:2rem;" *ngIf="hasNewItem">
-<create-item></create-item>
-</div>
+<div style="margin:2rem;" [@createItemAnimation]='state'>
+    <create-item  [id]="list.id" ></create-item>
+</div> 

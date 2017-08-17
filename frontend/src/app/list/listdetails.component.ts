@@ -2,26 +2,41 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ItemService, ListService } from '../_services/index';
 import { List, Item, Category } from '../_models/index';
-import { Priority } from "../_constants/index";
+import { Priority, listExport, host } from "../_constants/index";
 import { fadeInAnimation } from "../_animations/index";
+import { trigger, animate, style, state, transition } from '@angular/animations';
 
 @Component({
     selector: 'list-details',
     templateUrl: 'listdetails.component.html',
-    animations: [fadeInAnimation],
-    host: { '[@fadeInAnimation]': '' }
+    animations: [
+        trigger('createItemAnimation', [
+            state('closed', style({
+                opacity: 0,
+                display: 'none',
+                width: "60%",
+            })),
+            state('opened', style({
+                opacity: 1,
+                display: 'block',
+                width: "85%",
+            })),
+            transition('closed <=> opened', animate('400ms ease-in'))
+        ]),
+    ],
 })
 
 export class ListDetailsComponent{
     
 
-    //Using Mock Data for now to test view
     id: string;
     list: List;
     items: Item[] = [];
     priorityStyle: string = "border-left-color: #e41e1b;border-left-style: solid; border-left-width: 9px;";
     showNotes:boolean = true;
     hasNewItem:boolean = false;
+    state:string = 'closed';
+
     constructor(private route: ActivatedRoute, private listService: ListService, private itemService: ItemService){}
 
     ngOnInit()
@@ -40,15 +55,17 @@ export class ListDetailsComponent{
                 });
     }
 
+    
     deleteItem(id: string)
     {
         this.itemService.delete(id).subscribe(()=>{this.loadItems()});
     }
 
-    loadItems()
+    loadItems = function()
     {
         this.listService.get(this.id).subscribe(data=>
             {
+                console.log("loadItems function called")
                 this.list = <List>data;
                 this.list['items'] = this.list['items'].sort((a,b)=>
                 {
@@ -57,6 +74,16 @@ export class ListDetailsComponent{
                     return second-first
                 })
             })
+    }
+
+    onListLoad()
+    {
+        this.loadItems();
+    }
+
+    export()
+    {
+        this.listService.export(this.id);
     }
 
     goBack()
@@ -90,5 +117,11 @@ export class ListDetailsComponent{
     toggleNewItem()
     {
         this.hasNewItem = this.hasNewItem ? false : true;
+    }
+
+    toggleState()
+    {
+        this.state = (this.state === 'closed' ? 'opened' : 'closed');
+        console.log(this.state)
     }
 }

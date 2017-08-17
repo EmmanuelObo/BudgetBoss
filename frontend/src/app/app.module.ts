@@ -21,6 +21,10 @@ import { AuthenticationService, ItemService, ListService } from "./_services/ind
 
 import { AuthGuard } from './_guards/index';
 
+import {MdButtonModule, MdCheckboxModule, MdIconModule} from '@angular/material';
+
+import 'hammerjs';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +42,15 @@ import { AuthGuard } from './_guards/index';
     FormsModule,
     HttpClientModule,
     HttpModule,
+    MdButtonModule,
+    MdCheckboxModule,
+    MdIconModule,
     RouterModule.forRoot(appRoutes)
+  ],
+  exports: [
+    MdButtonModule,
+    MdCheckboxModule,
+    MdIconModule
   ],
   providers: [ItemService, AuthenticationService, ListService, AuthGuard],
   bootstrap: [AppComponent]
