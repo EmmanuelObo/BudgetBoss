@@ -21,8 +21,8 @@ import { AuthenticationService, ItemService, ListService } from "./_services/ind
 
 import { AuthGuard } from './_guards/index';
 
-import {MdButtonModule, MdCheckboxModule, MdIconModule} from '@angular/material';
-
+import { MdButtonModule, MdSortModule, MdCheckboxModule, MdIconModule, MdSidenavModule, MdToolbarModule, MdCardModule, MdTableModule } from '@angular/material';
+import { CdkTableModule } from '@angular/cdk';
 import 'hammerjs';
 
 
@@ -45,12 +45,23 @@ import 'hammerjs';
     MdButtonModule,
     MdCheckboxModule,
     MdIconModule,
+    MdSidenavModule,
+    MdToolbarModule,
+    MdCardModule,
+    MdTableModule,
+    MdSortModule,
     RouterModule.forRoot(appRoutes)
   ],
   exports: [
+    CdkTableModule,
     MdButtonModule,
     MdCheckboxModule,
-    MdIconModule
+    MdIconModule,
+    MdSidenavModule,
+    MdToolbarModule,
+    MdCardModule,
+    MdTableModule,
+    MdSortModule
   ],
   providers: [ItemService, AuthenticationService, ListService, AuthGuard],
   bootstrap: [AppComponent]

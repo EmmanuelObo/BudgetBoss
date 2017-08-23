@@ -1,9 +1,9 @@
-<div>
+<!-- <div>
     <h1 style="font-size: 25px;">{{user.username}}'s Lists!</h1>
-</div>
+</div> -->
 
 
-<div class="card" style="width: 36rem; margin-bottom: 10px;" *ngFor="let list of lists">
+<!-- <div class="card" style="width: 36rem; margin-bottom: 10px;" *ngFor="let list of lists">
     <div class="card-header">{{list.title}}</div>
     <div class="card-block">
     <h4 class="card-title"> <b>{{list.item_count}}</b> Items </h4>
@@ -11,4 +11,18 @@
     <a [routerLink]="[routeList,list.id]" class="btn btn-primary">Go to List</a>
     <a (click)="deleteList(list.id);" class="btn btn-danger" style="color: white;cursor: pointer;">Delete List</a>
   </div>
-</div>
+</div> -->
+
+<md-card class="card" style="margin-top: 10px; margin-bottom: 10px;" *ngFor="let list of lists">
+    <md-card-header>
+        <md-card-title> {{list.title}} </md-card-title>
+        <md-card-subtitle> {{list.category.title}} </md-card-subtitle>
+    </md-card-header>
+
+    <md-card-actions>
+        <button [routerLink]="[routeList,list.id]" md-button>Go to List</button>
+        <button class="btn btn-danger" (click)="deleteList(list.id);" md-button><md-icon>delete</md-icon></button>
+    </md-card-actions>
+</md-card> 
+
+<!-- <create-list [user]="user" ></create-list> -->

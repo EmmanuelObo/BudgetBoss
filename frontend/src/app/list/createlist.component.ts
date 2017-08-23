@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { categoryURI, slash } from '../_constants/index';
 import { ListService } from '../_services/index';
 
@@ -10,8 +10,9 @@ import { ListService } from '../_services/index';
 export class CreateListComponent{
     constructor(private listService: ListService){}
 
+    @Input() user;
+
     model: any = {"items":[], "user": "/api/v1/user/1/"}
-    categories: [string,number][] = [["Groceries", 1], ["Bills",2], ["Loans",3], ["Home",4], ["Car",5]]
     hasLimit: boolean = false;
     limitBtnText: string = 'Add Limit'
     limitBtnStyle: string = 'btn btn-primary'

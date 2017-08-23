@@ -20,8 +20,8 @@
         <div class="form-group">
             <label for="ctgry">Category</label>
             <select class="form-control"  [(ngModel)]="model.category" name="category" id="ctgry">
-                <option *ngFor="let category of categories" 
-                value={{category[1]}}> {{category[0]}} </option>
+                <option *ngFor="let category of user.categories" 
+                value={{category.title}}> {{category.title}} </option>
             </select>
         </div>
         <button type="submit" class="btn btn-success">Create</button>
