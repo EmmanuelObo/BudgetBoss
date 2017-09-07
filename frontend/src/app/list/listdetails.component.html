@@ -19,11 +19,15 @@
     
 
 <div>
-    <button md-raised-button (click)="goBack();" class="btn btn-primary" >
+    <button md-raised-button (click)="goBack();" class="button btn btn-primary" >
         Back
     </button>
-    <button md-raised-button (click)="export();" class="btn btn-warning" >Export</button>
-    <button md-raised-button (click)="toggleState()" class="btn btn-success">New</button>
+     <select placeholder="Select extension" #extension name="ext">
+        <option *ngFor="let ext of extensions" [value]="ext.value">{{ext.text}}</option>
+    </select> 
+    
+    <button md-raised-button (click)="export(extension.value)" class="button btn btn-warning" >Export</button>
+    <button md-raised-button (click)="toggleState()" class="button btn btn-success">New</button>
 </div>
 
 

@@ -29,9 +29,9 @@ export class ListService {
         return this.http.get(host + listURI + id + slash);
     }
 
-    export(id)
+    export(id, ext)
     {
-         window.location.href = host + listExport + id;
+         window.location.href = host + listExport + ext + slash + id;
     }
 
     loadAll(_userid) 

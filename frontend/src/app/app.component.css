@@ -86,3 +86,10 @@ app-sidenav-container {
     padding: 20px;
   }
   
+  .spacer{
+      flex: 1 1 auto;
+  }
+
+  .menu-icon{
+    padding: -1 30px;
+  }

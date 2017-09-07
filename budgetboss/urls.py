@@ -19,12 +19,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from tastypie.api import Api
 
-from app.api.resources import ListResource, UserResource, ItemResource, CategoryResource
+from app.api.resources import ListResource, UserResource, ItemResource, CategoryResource, CreateUserResource
 from app.views import loginview, contentview, registerview, views
 from lists.views import listviews
 
 bb_api = Api(api_name='v1')
 bb_api.register(ListResource())
+bb_api.register(CreateUserResource())
 bb_api.register(UserResource())
 bb_api.register(CategoryResource())
 bb_api.register(ItemResource())
@@ -36,7 +37,7 @@ urlpatterns = [
     url(r'^list/$', listviews.central, name='users_lists'),
     url(r'^list/view/(\d+)/$', listviews.view, name='view_list'),
     url(r'^list/edit/(\d+)/$',listviews.editlist, name='edit_list'),
-    url(r'^list/export/(\d+)/$',listviews.export, name='export_list'),
+    url(r'^list/export/(\w+)/(\d+)/$',listviews.export, name='export_list'),
     url(r'^editlist/', listviews.editlist),
     url(r'^editlisttemp/', listviews.editlisttemplate),
     url(r'^login/', loginview.user_login, name='login'),

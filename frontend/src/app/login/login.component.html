@@ -1,5 +1,5 @@
 <div class="container col-md-5">
-    <div>
+    <div style="margin-bottom: 30px;margin-top:30px;">   
         <h1>Login</h1>
         <p>Please login using the form below.</p>
     </div>
@@ -25,7 +25,8 @@
             Password is required!
         </div>
 
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button md-raised-button type="submit" routerLinkActive="active" class="btn btn-primary">Login</button>
+        <button md-raised-button routerLink="/register" routerLinkActive="active" type="button" class="btn btn-default">Sign Up</button>
     </form>
 
     <div *ngIf="isAuthenticated">

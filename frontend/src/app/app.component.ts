@@ -18,8 +18,18 @@ export class AppComponent implements OnInit {
   title: string = 'Budget.Boss';
   appTitle = 'app-title';
   arr = [];
+  isLoggedIn:boolean;
 
   mylist:List;
+
+  timer = setInterval(this.checkIfLoggedIn(), 3000);
+
+
+  checkIfLoggedIn()
+  {
+    this.isLoggedIn = (localStorage.getItem('loggedinUser') === null ? false : true);
+  }  
+  
 
   calculations(input: any) 
   {

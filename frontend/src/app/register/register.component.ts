@@ -5,4 +5,12 @@ import { Component } from '@angular/core';
     templateUrl: './register.component.html'
 })
 
-export class RegisterComponent{}
+export class RegisterComponent{
+
+    model:any = {}
+
+    register()
+    {
+        console.log(this.model);
+    }
+}

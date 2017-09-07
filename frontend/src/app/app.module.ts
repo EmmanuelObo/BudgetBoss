@@ -14,6 +14,7 @@ import { CreateListComponent } from './list/createlist.component';
 import { ListDetailsComponent } from "./list/listdetails.component";
 import { ListComponent } from "./list/list.component";
 import { CreateItemComponent } from "./item/createitem.component";
+import { RegisterComponent } from "./register/register.component";
 
 import { appRoutes } from './_constants/routes.constants';
 
@@ -21,7 +22,7 @@ import { AuthenticationService, ItemService, ListService } from "./_services/ind
 
 import { AuthGuard } from './_guards/index';
 
-import { MdButtonModule, MdSortModule, MdCheckboxModule, MdIconModule, MdSidenavModule, MdToolbarModule, MdCardModule, MdTableModule } from '@angular/material';
+import { MaterialModule } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk';
 import 'hammerjs';
 
@@ -30,6 +31,7 @@ import 'hammerjs';
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent,
     HomeComponent,
     CreateListComponent,
     ListDetailsComponent,
@@ -42,26 +44,12 @@ import 'hammerjs';
     FormsModule,
     HttpClientModule,
     HttpModule,
-    MdButtonModule,
-    MdCheckboxModule,
-    MdIconModule,
-    MdSidenavModule,
-    MdToolbarModule,
-    MdCardModule,
-    MdTableModule,
-    MdSortModule,
+    MaterialModule,
     RouterModule.forRoot(appRoutes)
   ],
   exports: [
     CdkTableModule,
-    MdButtonModule,
-    MdCheckboxModule,
-    MdIconModule,
-    MdSidenavModule,
-    MdToolbarModule,
-    MdCardModule,
-    MdTableModule,
-    MdSortModule
+    MaterialModule
   ],
   providers: [ItemService, AuthenticationService, ListService, AuthGuard],
   bootstrap: [AppComponent]

@@ -24,6 +24,7 @@ import { trigger, animate, style, state, transition } from '@angular/animations'
             transition('closed <=> opened', animate('400ms ease-in'))
         ]),
     ],
+    styleUrls: ['listdetails.component.css']
 })
 
 export class ListDetailsComponent{
@@ -36,6 +37,8 @@ export class ListDetailsComponent{
     showNotes:boolean = true;
     hasNewItem:boolean = false;
     state:string = 'closed';
+
+    extensions = [{text: 'txt', value: 'txt'},{text: 'xls', value: 'csv'},{text: 'pdf', value:'pdf'}]
 
     constructor(private route: ActivatedRoute, private listService: ListService, private itemService: ItemService){}
 
@@ -81,9 +84,9 @@ export class ListDetailsComponent{
         this.loadItems();
     }
 
-    export()
+    export(ext: string)
     {
-        this.listService.export(this.id);
+        this.listService.export(this.id, ext);
     }
 
     goBack()

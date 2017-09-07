@@ -8,3 +8,8 @@ export const loginPath: string = '/login';
 export const logoutPath: string = '/logout';
 export const listPath: string = '/list';
 export const listExport: string = 'list/export/';
+
+//EXTENSIONS
+export const pdf: string = 'pdf';
+export const csv: string = 'csv';
+export const txt: string = 'txt';

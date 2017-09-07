@@ -1,0 +1,80 @@
+<div style="margin-bottom: 30px;margin-top:30px;">   
+    <h1>Sign Up</h1>
+</div>
+
+<form (submit)="register();" #registerForm="ngForm">
+
+    <div class="form-group row">
+        <label class="col-md-3" for="firstname">First Name:</label>
+        <div class="col-md-6">   
+            <input class="form-control" 
+                   type="text" 
+                   placeholder="First Name" 
+                   [(ngModel)]="model.firstname" 
+                   name="firstname">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-md-3" for="lastname">Last Name:</label>
+        <div class="col-md-6">   
+            <input class="form-control" 
+                   type="text" 
+                   placeholder="Last Name" 
+                   [(ngModel)]="model.lastname" 
+                   name="lastname">
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <label class="col-md-3" for="username">Username:</label>
+        <div class="col-md-6">   
+            <input class="form-control" 
+                   type="text" 
+                   placeholder="Username" 
+                   [(ngModel)]="model.username" 
+                   name="username">
+        </div>
+    </div>
+
+    <div class="form-group row">   
+        <label class="col-md-3" for="password">Password:</label>
+        <div class="col-md-6">
+            <input class="form-control" 
+                   type="password" 
+                   [(ngModel)]="model.password" 
+                   placeholder="Password" 
+                   name="password"
+                   #psswrd>
+        </div>
+    </div>
+
+    <div class="form-group row">   
+        <label class="col-md-3" for="confirm-password">Confirm Password:</label>
+        <div class="col-md-6">
+            <input class="form-control" 
+                   type="password" 
+                   placeholder="Confirm Password" 
+                   name="passwordconfirm"
+                   #psswrdconf>
+        </div>
+    </div>
+
+    <div class="form-group row">   
+        <label class="col-md-3" for="email">Email:</label>
+        <div class="col-md-6">
+            <input class="form-control" 
+                   type="email" 
+                   [(ngModel)]="model.email" 
+                   placeholder="Email" 
+                   name="email">
+        </div>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="psswrd.val != psswrdconf.val">   
+        Password not validated!
+    </div>
+
+    <button type="submit" md-raised-button class="btn btn-primary">Sign Up</button>
+    <button routerLink="/login" type="button" md-raised-button class="btn btn-default">Login</button>
+</form>

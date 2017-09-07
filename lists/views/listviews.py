@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from items.helpers import itemfunc
 from items.models import Item
 from lists.helpers import listfunc
+from lists.helpers.filegenerator import FileGenerator
 from lists.models import List
 from categories.models import Category
 
@@ -31,7 +32,7 @@ def listtemplate(request):
         filteredList = request.user.list_set.order_by('-dateCreated')
         allCat = Category.objects.get(title=selectedCategory)
         return render(request, 'subtemplates/list_sub.html', {"user": request.user, "user_list": filteredList,
-                                                              "category": allCat })
+                                                              "category": allCat})
 
     filteredList = List.objects.filter(category=Category.objects.get(title=request.session['selectedCategory']),
                                        owner=request.user)
@@ -56,35 +57,25 @@ def editlisttemplate(request):
     return render(request, 'subtemplates/editlist_sub.html',
                   {"user": request.user, 'list': user_list, 'time_now': datetime.datetime.now})
 
+
 def currlist(request, id):
     mylist = List.objects.get(pk=id)
     if mylist == None:
         return HttpResponse("List Not Found!")
     return HttpResponse("List Title: " + mylist.title + ", \n ID: " + str(mylist.id))
 
-def view(request, id):
 
+def view(request, id):
     try:
         mylist = List.objects.get(pk=id)
         items = mylist.item_set.prioritize
-        return render(request, 'viewlist.html', {'list': mylist, 'items':items})
+        return render(request, 'viewlist.html', {'list': mylist, 'items': items})
 
     except ValueError:
         return HttpResponse("404 (INVALID PAGE)")
 
-def export(request, id):
-    mylist = List.objects.get(pk=id)
 
-    filename = mylist.title + '.csv'
+def export(request, extension, id):
+    filegen = FileGenerator(extension, id, None)
 
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename='+filename
-
-    file_writer = csv.writer(response)
-
-    file_writer.writerow(["NAME", "COST", "NOTE", "PRIORITY", "DATE CREATED"])
-
-    for item in mylist.item_set.prioritize():
-        file_writer.writerow([item.name, '$'+str(item.cost),item.note,item.priority, item.dateCreated])
-
-    return response
+    return filegen.export()
