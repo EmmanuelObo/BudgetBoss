@@ -1,7 +1,7 @@
 from lists.models import List
 
 
-class FileManager():
+class FileGenerator():
     mode = 'w'
     def export(self, List, extension):
         file = open(List.title + extension, self.mode)
