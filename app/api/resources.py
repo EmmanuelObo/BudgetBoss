@@ -10,6 +10,8 @@ from lists.models import List
 from items.models import Item
 from categories.models import Category
 
+from django.contrib.auth.hashers import make_password
+
 
 class UserResource(ModelResource):
     categories = fields.ToManyField('app.api.resources.CategoryResource', 'category_set', related_name='category',
@@ -67,7 +69,7 @@ class UserResource(ModelResource):
 
 class CreateUserResource(ModelResource):
     class Meta:
-        allowed_methods = ['post']
+        allowed_methods = ['post','get']
         always_return_data = True
         authentication = Authentication()
         authorization = Authorization()
@@ -75,22 +77,20 @@ class CreateUserResource(ModelResource):
         resource_name = 'create_user'
 
         def hydrate(self, bundle):
+            bundle.data['username'] = bundle.data['username'].upper()
+            if bundle.data.has_key('password'):
+                u = User(username='mat')
+                u.set_password(make_password(bundle.data['password']))
+                bundle.data['password'] = u.password
             return bundle
 
         def obj_create(self, bundle, **kwargs):
-            try:
-                email = bundle.data['user']['email']
-                username = bundle.data['user']['username']
-                if User.objects.filter(email=email):
-                    raise CustomBadRequest(code="duplicate_exception", message="Email is already in use")
-                if User.objects.filter(username=username):
-                    raise CustomBadRequest(code="duplicate_exception", message="Username is taken :(")
+            kwargs["password"] = make_password(bundle.data['password'])
+            bundle.data['username'] = bundle.data['username'].upper()
+            bundle.data['last_name'] = 'Barney'
 
-            except User.DoesNotExist:
-                pass
-
-            self._meta.resource_name = UserResource._meta.resource_name
-            return super(CreateUserResource, self).obj_create(bundle, **kwargs)
+            #self._meta.resource_name = UserResource._meta.resource_name
+            return super(CreateUserResource, self).obj_create(bundle,**kwargs)
 
 
 class CategoryResource(ModelResource):

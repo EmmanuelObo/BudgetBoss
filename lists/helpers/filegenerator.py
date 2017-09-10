@@ -72,6 +72,3 @@ class FileGenerator():
 
         else:
             print('Some other extension')
-
-
-

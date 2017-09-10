@@ -1,28 +1,69 @@
-<!-- <div>
-    <h1 style="font-size: 25px;">{{user.username}}'s Lists!</h1>
-</div> -->
+<style>
+    .list-menu{
+        right: 0;
+        display: grid;
+        position: absolute;
+        top: 0px;
+        background-color: azure;
+        height: 100%;
+    }
+
+    md-card{
+        height: 95px;
+        width: 60%;
+        margin: 45px;
+    }
+
+    .list-container{
+        width: 81.5%;
+        margin: -8px 0px 0px -24px;
+        height: 155%;
+    }
+
+    md-card-title{
+        font-family: 'Exo', sans-serif;
+        font-size: large;
+    }
+
+    .main{
+        display: flex;
+        width: 175%;
+        align-content: center;
+        margin: auto -231px;
+}
+
+    .list-details-section{
+    bottom: 2px;
+    position: absolute;
+    width: 66%;
+    margin: 0px 0px 0px -87px;
+    display: inline-flex;
+    font-family: 'Quicksand', sans-serif;
+    }
+
+</style>
 
 
-<!-- <div class="card" style="width: 36rem; margin-bottom: 10px;" *ngFor="let list of lists">
-    <div class="card-header">{{list.title}}</div>
-    <div class="card-block">
-    <h4 class="card-title"> <b>{{list.item_count}}</b> Items </h4>
-    <p class="card-text">Total: ${{list.total}} </p>
-    <a [routerLink]="[routeList,list.id]" class="btn btn-primary">Go to List</a>
-    <a (click)="deleteList(list.id);" class="btn btn-danger" style="color: white;cursor: pointer;">Delete List</a>
-  </div>
-</div> -->
+<div class="main">
 
-<md-card class="card" style="margin-top: 10px; margin-bottom: 10px;" *ngFor="let list of lists">
-    <md-card-header>
-        <md-card-title> {{list.title}} </md-card-title>
-        <md-card-subtitle> {{list.category.title}} </md-card-subtitle>
-    </md-card-header>
+    <md-card class="card" style="margin-top: 10px; margin-bottom: 10px;" *ngFor="let list of lists">
+        <div class="list-container">
+            <md-card-title> {{list.title}} </md-card-title>
+            <div class="list-details-section">
+                <div style="left: 17px;position: relative;">{{list.category.title}}</div>
+                <div style="right: 17px;position: absolute;">${{list.total}}</div>
+            </div>
 
-    <md-card-actions>
-        <button [routerLink]="[routeList,list.id]" md-button>Go to List</button>
-        <button class="btn btn-danger" (click)="deleteList(list.id);" md-button><md-icon>delete</md-icon></button>
-    </md-card-actions>
-</md-card> 
+            <!-- <md-card-subtitle> {{list.category.title}} </md-card-subtitle>
+            <md-card-subtitle> ${{list.total}} </md-card-subtitle> -->
+        </div>
 
+
+        <div class="list-menu">
+            <button class="btn btn-success" [routerLink]="[routeList,list.id]" md-button><md-icon>edit</md-icon></button>
+            <button class="btn btn-danger" (click)="deleteList(list.id);" md-button><md-icon>delete</md-icon></button>
+        </div>
+    </md-card> 
+
+</div>
 <!-- <create-list [user]="user" ></create-list> -->

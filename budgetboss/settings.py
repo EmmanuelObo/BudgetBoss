@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     # REST API
     'tastypie',
     'rest_framework',
-    'rest_framework.authtoken',
+    #'rest_framework.authtoken',
 
     # Apps
     'budgets.apps.BudgetsConfig',

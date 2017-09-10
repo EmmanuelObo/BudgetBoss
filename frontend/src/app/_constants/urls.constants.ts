@@ -8,6 +8,7 @@ export const loginPath: string = '/login';
 export const logoutPath: string = '/logout';
 export const listPath: string = '/list';
 export const listExport: string = 'list/export/';
+export const registerPath: string = 'api/v1/create_user';
 
 //EXTENSIONS
 export const pdf: string = 'pdf';
