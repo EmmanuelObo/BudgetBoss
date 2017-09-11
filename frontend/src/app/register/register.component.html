@@ -2,14 +2,14 @@
     <h1>Sign Up</h1>
 </div>
 
-<form (submit)="register();" #registerForm="ngForm">
+<form style="margin-left: 8px;" (submit)="register();" #registerForm="ngForm">
 
     <div class="form-group row">
         <label class="col-md-3" for="firstname">First Name:</label>
         <div class="col-md-6">   
             <input class="form-control" 
                    type="text" 
-                   placeholder="First Name" 
+                   placeholder="John" 
                    [(ngModel)]="model.first_name" 
                    name="firstname">
         </div>
@@ -20,7 +20,7 @@
         <div class="col-md-6">   
             <input class="form-control" 
                    type="text" 
-                   placeholder="Last Name" 
+                   placeholder="Doe" 
                    [(ngModel)]="model.last_name" 
                    name="lastname">
         </div>
@@ -31,7 +31,7 @@
         <div class="col-md-6">   
             <input class="form-control" 
                    type="text" 
-                   placeholder="Username" 
+                   placeholder="JonnyDoeBoi" 
                    [(ngModel)]="model.username" 
                    name="username">
         </div>
@@ -43,7 +43,7 @@
             <input class="form-control" 
                    type="password" 
                    [(ngModel)]="model.password" 
-                   placeholder="Password" 
+                   placeholder="Secret" 
                    name="password"
                    #psswrd>
         </div>
@@ -54,7 +54,7 @@
         <div class="col-md-6">
             <input class="form-control" 
                    type="password" 
-                   placeholder="Confirm Password" 
+                   placeholder="Match Secret" 
                    name="passwordconfirm"
                    #psswrdconf>
         </div>
@@ -66,7 +66,7 @@
             <input class="form-control" 
                    type="email" 
                    [(ngModel)]="model.email" 
-                   placeholder="Email" 
+                   placeholder="jondoe@gmail.com" 
                    name="email">
         </div>
     </div>

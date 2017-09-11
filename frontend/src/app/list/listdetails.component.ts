@@ -3,13 +3,13 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ItemService, ListService } from '../_services/index';
 import { List, Item, Category } from '../_models/index';
 import { Priority, listExport, host } from "../_constants/index";
-import { fadeInAnimation } from "../_animations/index";
+import { slideFromTop } from "../_animations/index";
 import { trigger, animate, style, state, transition } from '@angular/animations';
 
 @Component({
     selector: 'list-details',
     templateUrl: 'listdetails.component.html',
-    animations: [
+    animations: [slideFromTop,
         trigger('createItemAnimation', [
             state('closed', style({
                 opacity: 0,
@@ -24,6 +24,7 @@ import { trigger, animate, style, state, transition } from '@angular/animations'
             transition('closed <=> opened', animate('400ms ease-in'))
         ]),
     ],
+    host: { '[@slideFromTop]': '' },
     styleUrls: ['listdetails.component.css']
 })
 

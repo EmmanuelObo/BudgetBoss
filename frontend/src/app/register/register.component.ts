@@ -5,8 +5,8 @@ import { fadeInAnimation, slideFromTop } from '../_animations/index';
 @Component({
     selector: 'register',
     templateUrl: './register.component.html',
-    animations: [slideFromTop],
-    host: {'[@slideFromTop]': ''}
+    animations: [fadeInAnimation],
+    host: {'[@fadeInAnimation]': ''}
 })
 
 export class RegisterComponent{

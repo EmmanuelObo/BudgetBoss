@@ -11,8 +11,28 @@
 
         <div class="list-menu">
             <button class="btn btn-success" [routerLink]="[routeList,list.id]" md-button><md-icon>edit</md-icon></button>
+            <button class="btn btn-warning" (click)="toggleExt()" md-button><md-icon>file_download</md-icon></button>
             <button class="btn btn-danger" (click)="deleteList(list.id);" md-button><md-icon>delete</md-icon></button>
+        
+
+            <div *ngIf="toggledExt" class="extension-container">
+                <md-radio-group class="extension-selector-group" [(ngModel)]="extensionType">
+                    <md-radio-button class="extension txt" (click)="export('txt', list.id)" value="txt">
+                        txt
+                    </md-radio-button>
+
+                    <md-radio-button class="extension pdf" (click)="export('pdf', list.id)" value="pdf">
+                            pdf
+                        </md-radio-button>
+
+                    <md-radio-button class="extension xls" (click)="export('csv', list.id)" value="xls">
+                            xls
+                    </md-radio-button>
+                </md-radio-group>
+            </div>
+
         </div>
+
     </md-card> 
 
 </div>

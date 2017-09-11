@@ -6,9 +6,7 @@ import { fadeInAnimation, slideFromTop } from "../_animations/index";
 @Component({
     selector: 'list',
     templateUrl: 'list.component.html',
-    styleUrls: ['list.component.css'],
-    // animations: [slideFromTop],
-    // host: { '[@slideFromTop]': '' }
+    styleUrls: ['list.component.css']
 })
 
 export class ListComponent implements OnInit{
@@ -16,6 +14,7 @@ export class ListComponent implements OnInit{
     lists:List[] = [];
     user:User;
     routeList: string = '/list/';
+    toggledExt: Boolean = false;
     
     constructor(private listService: ListService)
     {
@@ -35,5 +34,15 @@ export class ListComponent implements OnInit{
     loadUsersLists()
     {
         this.listService.loadAll(this.user['id']).subscribe(data=>{this.lists = data['objects']});
+    }
+
+    export(ext: string, id)
+    {
+        this.listService.export(id, ext);
+    }
+
+    toggleExt()
+    {
+        this.toggledExt = (this.toggledExt ? false : true);
     }
 }

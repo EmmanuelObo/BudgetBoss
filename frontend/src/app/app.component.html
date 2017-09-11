@@ -2,7 +2,7 @@
     <span>Budget Boss</span>
     <span class="spacer"></span>
     <button md-icon-button [mdMenuTriggerFor]="menu">
-      <md-icon *ngIf="isLoggedIn" class="menu-icon">face</md-icon>
+      <md-icon *ngIf="isLoggedIn" class="menu-icon">power_settings_new</md-icon>
     </button>
 
     <md-menu #menu="mdMenu">
@@ -50,7 +50,7 @@
     </script>
 
 <div id="page-content-wrapper">
-  <div class="container-fluid main-container" style="width: 607px;text-align:center;height: 358px;margin: auto;">
+  <div class="container-fluid main-container" style="width: 607px;text-align:center;height: 358px;margin: auto 0;">
     <router-outlet></router-outlet>
     <!-- <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a> -->
   </div> 

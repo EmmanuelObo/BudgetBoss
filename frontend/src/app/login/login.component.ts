@@ -10,8 +10,8 @@ import { fadeInAnimation, slideFromTop } from '../_animations/index';
     selector: 'app-login',
     templateUrl: 'login.component.html',
     styleUrls: ['login.component.css'],
-    animations: [slideFromTop],
-    host: {'[@slideFromTop]': ''}
+    animations: [fadeInAnimation],
+    host: {'[@fadeInAnimation]': ''}
 })
 
 export class LoginComponent{
