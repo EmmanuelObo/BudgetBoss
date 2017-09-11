@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ListService } from '../_services/index';
 import { List, User } from '../_models/index';
-import { fadeInAnimation } from "../_animations/index";
+import { fadeInAnimation, slideFromTop } from "../_animations/index";
  
 @Component({
     selector: 'list',
     templateUrl: 'list.component.html',
-    animations: [fadeInAnimation],
-    host: { '[@fadeInAnimation]': '' }
+    styleUrls: ['list.component.css'],
+    // animations: [slideFromTop],
+    // host: { '[@slideFromTop]': '' }
 })
 
 export class ListComponent implements OnInit{

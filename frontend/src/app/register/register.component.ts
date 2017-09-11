@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from '../_services/index';
+import { fadeInAnimation, slideFromTop } from '../_animations/index';
 
 @Component({
     selector: 'register',
-    templateUrl: './register.component.html'
+    templateUrl: './register.component.html',
+    animations: [slideFromTop],
+    host: {'[@slideFromTop]': ''}
 })
 
 export class RegisterComponent{

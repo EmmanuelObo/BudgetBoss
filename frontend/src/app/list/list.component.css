@@ -1,0 +1,41 @@
+.list-menu{
+    right: 0;
+    display: grid;
+    position: absolute;
+    top: 0px;
+    background-color: azure;
+    height: 100%;
+}
+
+md-card{
+    height: 95px;
+    width: 60%;
+    margin: 45px;
+}
+
+.list-container{
+    width: 81.5%;
+    margin: -8px 0px 0px -24px;
+    height: 155%;
+}
+
+md-card-title{
+    font-family: 'Exo', sans-serif;
+    font-size: large;
+}
+
+.main{
+    display: flex;
+    width: 175%;
+    align-content: center;
+    margin: auto -231px;
+}
+
+.list-details-section{
+bottom: 2px;
+position: absolute;
+width: 66%;
+margin: 0px 0px 0px -87px;
+display: inline-flex;
+font-family: 'Quicksand', sans-serif;
+}

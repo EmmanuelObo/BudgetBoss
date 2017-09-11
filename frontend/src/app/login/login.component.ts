@@ -4,11 +4,14 @@ import { AuthenticationService, ItemService } from '../_services/index';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { homePath } from '../_constants/index';
+import { fadeInAnimation, slideFromTop } from '../_animations/index';
 
 @Component({
     selector: 'app-login',
     templateUrl: 'login.component.html',
-    styleUrls: ['login.component.css']
+    styleUrls: ['login.component.css'],
+    animations: [slideFromTop],
+    host: {'[@slideFromTop]': ''}
 })
 
 export class LoginComponent{

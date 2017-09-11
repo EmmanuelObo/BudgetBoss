@@ -48,6 +48,11 @@ export class AppComponent implements OnInit {
     this.listService.get(input);
   }
 
+  toggleSideNav()
+  {
+    //Code to Toggle Side Nagivation
+  }
+
   ngOnInit(): void 
   {}
 }

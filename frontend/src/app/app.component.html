@@ -13,35 +13,47 @@
     </md-menu>
     
   </md-toolbar>
-
-<!-- <div class="sidebar sidebar-nav">
-  <div class="sidebar-header">
-    Navigator
+  <div id="wrapper" class="toggled">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <ul class="sidebar-nav">
+              <li class="sidebar-brand">
+                  <a href="#">
+                    Dashboard
+                  </a>
+              </li>
+              <li>
+                  <a href="#">Guide</a>
+              </li>
+              <li>
+                  <a href="#">Favorites</a>
+              </li>
+              <li>
+                  <a href="#">Settings</a>
+              </li>
+              <li>
+                  <a href="#">Events</a>
+              </li>
+              <li>
+                  <a href="#">Contact</a>
+              </li>
+          </ul>
+      </div>
   </div>
-  <div class="sidebar-body">
-    <ul style="padding: 0px;">
-      <li class="sidebar-menu-item">Home</li>
-      <li class="sidebar-menu-item">Lists</li>
-      <li class="sidebar-menu-item">Category</li>
-      <li class="sidebar-menu-item">Settings</li>
-    </ul>
-  </div>
-</div> 
 
-<div class="sidenav col-sm-2">
-  <div class="sidenav-header"></div>
-  <div class="sidenav-body">
-    <ul style="padding: 40px;">
-      <li class="sidebar-menu-item">Home</li>
-      <li class="sidebar-menu-item">Lists</li>
-      <li class="sidebar-menu-item">Category</li>
-      <li class="sidebar-menu-item">Settings</li>
-    </ul>
-  </div>
-  <div class="sidenav-footer"></div>
-</div> -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    console.log('AHAHAHAHAHHAHAHA!')
+    </script>
+
+<div id="page-content-wrapper">
+  <div class="container-fluid main-container" style="width: 607px;text-align:center;height: 358px;margin: auto;">
+    <router-outlet></router-outlet>
+    <!-- <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a> -->
+  </div> 
+</div>
 
 
-<div class="main-container" style="width: 607px;text-align:center;height: 358px;margin: auto;">
-  <router-outlet></router-outlet>
-</div> 
