@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   appTitle = 'app-title';
   arr = [];
   isLoggedIn:boolean;
+  isToggled:boolean = true;
 
   mylist:List;
 
