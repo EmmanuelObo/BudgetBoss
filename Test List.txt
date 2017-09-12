@@ -1,4 +1,0 @@
-First Item -- $1.99 -- HIGH
-Third Item -- $3.99 -- MEDIUM
-Second Item -- $2.99 -- MEDIUM
-Fourth Item -- $4.99 -- LOW
