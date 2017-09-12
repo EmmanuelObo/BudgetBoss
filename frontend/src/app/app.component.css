@@ -150,8 +150,7 @@ app-sidenav-container {
 
 .sidebar-nav li a:hover {
     text-decoration: none;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.2);
+    color: hsla(231, 48%, 83%, 1);
 }
 
 .sidebar-nav li a:active,
@@ -170,7 +169,7 @@ app-sidenav-container {
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
+    color: hsla(231, 48%, 83%, 1);
     background: none;
 }
 
@@ -195,4 +194,8 @@ app-sidenav-container {
         position: relative;
         margin-right: 0;
     }
+}
+
+ul{
+    list-style: none;
 }

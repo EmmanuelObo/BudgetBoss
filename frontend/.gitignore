@@ -40,3 +40,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# requirements
+requirements.txt
+
+# manage.py
+manage.py
