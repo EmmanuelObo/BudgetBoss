@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     #'rest_framework.authtoken',
 
     # Apps
-    'budgets.apps.BudgetsConfig',
+    'goals.apps.BudgetsConfig',
     'lists.apps.ListsConfig',
     'categories.apps.CategoriesConfig',
     'items.apps.ItemsConfig',
