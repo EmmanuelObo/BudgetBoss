@@ -12,6 +12,8 @@ from categories.models import Category
 
 from django.contrib.auth.hashers import make_password
 
+from functools import reduce
+
 
 class UserResource(ModelResource):
     categories = fields.ToManyField('app.api.resources.CategoryResource', 'category_set', related_name='category',
@@ -106,9 +108,16 @@ class CategoryResource(ModelResource):
             'lists': ALL_WITH_RELATIONS
         }
 
+    def hydrate(self, bundle):
+        if bundle.obj.pk == 1:
+            bundle.obj.total = reduce((lambda a, b: a + b),[category.total+1 for category in bundle.obj.list_set.all()])
+
+        return bundle
+
+
     def dehydrate(self, bundle):
         bundle.data['list_count'] = int(bundle.obj.count)
-        #bundle.data['total'] = float(bundle.obj.total) if bundle.obj.total is not None else 0
+        bundle.data['total'] = float(bundle.obj.total) if bundle.obj.total is not None else 0
         bundle.data['lists'] = [{'id': currlist.id, 'title': currlist.title} for currlist in bundle.obj.list_set.all()]
         bundle.data['user'] = {'id': bundle.obj.owner.id,
                                'username': bundle.obj.owner.username}
@@ -137,11 +146,11 @@ class ListResource(ModelResource):
         limit = None
 
         # TODO: Restore 'total' & 'count' field on category
-        # if bundle.obj.category.total is not None or bundle.obj.category.total != 0:
-        #     category_total = float(bundle.obj.category.total)
+        if bundle.obj.category.total is not None or bundle.obj.category.total != 0:
+            category_total = float(bundle.obj.category.total)
 
-        # if bundle.obj.category.count is not None or bundle.obj.category.count != 0:
-        #     list_count = int(bundle.obj.category.count)
+        if bundle.obj.category.count is not None or bundle.obj.category.count != 0:
+            list_count = int(bundle.obj.category.count)
 
         if bundle.obj.total is not None or bundle.obj.total != 0:
             total = float(bundle.obj.total)
@@ -158,12 +167,12 @@ class ListResource(ModelResource):
                                  'priority': item.priority,
                                  'list': item.list.id} for item in bundle.obj.item_set.all()]
         bundle.data['limit'] = limit
-        # bundle.data['category'] = {'id': bundle.obj.category.id,
-        #                            'title': bundle.obj.category.title,
-        #                            'owner': {'id': bundle.obj.category.owner.id,
-        #                                      'username': bundle.obj.category.owner.username},
-        #                            'total': category_total,
-        #                            'list_count': list_count}
+        bundle.data['category'] = {'id': bundle.obj.category.id,
+                                   'title': bundle.obj.category.title,
+                                   'owner': {'id': bundle.obj.category.owner.id,
+                                             'username': bundle.obj.category.owner.username},
+                                   'total': category_total,
+                                   'list_count': list_count}
         bundle.data['item_count'] = count
         bundle.data['total'] = total
         return bundle
