@@ -11,7 +11,7 @@ export class ListService {
 
     create(data) 
     {
-        return this.http.post(host + listURI + data['id'] + slash, data);
+        return this.http.post(host + listURI, data);
     }
 
     delete(id) 

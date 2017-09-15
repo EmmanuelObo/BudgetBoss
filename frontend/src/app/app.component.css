@@ -199,3 +199,15 @@ app-sidenav-container {
 ul{
     list-style: none;
 }
+
+.create-container{
+    width: 50%;
+    height: 50%;
+    margin: auto 30%;
+    position: fixed;
+    top: 43%;
+}
+
+a{
+    cursor: pointer;
+}

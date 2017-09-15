@@ -108,7 +108,7 @@ class CategoryResource(ModelResource):
 
     def dehydrate(self, bundle):
         bundle.data['list_count'] = int(bundle.obj.count)
-        bundle.data['total'] = float(bundle.obj.total) if bundle.obj.total is not None else 0
+        #bundle.data['total'] = float(bundle.obj.total) if bundle.obj.total is not None else 0
         bundle.data['lists'] = [{'id': currlist.id, 'title': currlist.title} for currlist in bundle.obj.list_set.all()]
         bundle.data['user'] = {'id': bundle.obj.owner.id,
                                'username': bundle.obj.owner.username}
@@ -136,11 +136,12 @@ class ListResource(ModelResource):
         category_total = 0
         limit = None
 
-        if bundle.obj.category.total is not None or bundle.obj.category.total != 0:
-            category_total = float(bundle.obj.category.total)
+        # TODO: Restore 'total' & 'count' field on category
+        # if bundle.obj.category.total is not None or bundle.obj.category.total != 0:
+        #     category_total = float(bundle.obj.category.total)
 
-        if bundle.obj.category.count is not None or bundle.obj.category.count != 0:
-            list_count = int(bundle.obj.category.count)
+        # if bundle.obj.category.count is not None or bundle.obj.category.count != 0:
+        #     list_count = int(bundle.obj.category.count)
 
         if bundle.obj.total is not None or bundle.obj.total != 0:
             total = float(bundle.obj.total)

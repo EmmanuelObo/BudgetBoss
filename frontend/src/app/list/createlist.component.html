@@ -3,7 +3,7 @@
 </div>
 
 <div class="jumbotron">
-    <form (ngSubmit)="createList(); listForm.reset(); getLoadedItems();" #listForm="ngForm">
+    <form (ngSubmit)="createList(); listForm.reset();" #listForm="ngForm">
         <div class="form-group">
             <label>Title:</label>
             <input class="form-control" type="text" name="title" [(ngModel)]="model.title" >
@@ -21,7 +21,7 @@
             <label for="ctgry">Category</label>
             <select class="form-control"  [(ngModel)]="model.category" name="category" id="ctgry">
                 <option *ngFor="let category of user.categories" 
-                value={{category.title}}> {{category.title}} </option>
+                value={{category.id}}> {{category.title}} </option>
             </select>
         </div>
         <button type="submit" class="btn btn-success">Create</button>

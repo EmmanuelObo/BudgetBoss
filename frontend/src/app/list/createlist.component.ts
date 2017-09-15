@@ -37,6 +37,9 @@ export class CreateListComponent{
     {
         this.model['category'] = slash + categoryURI + this.model['category'] + slash;
         console.log(this.model);
-        this.listService.create(this.model);
+        this.listService.create(this.model).subscribe(data=>{},
+        error=>{console.info(error)});
     }
+
+    
 }

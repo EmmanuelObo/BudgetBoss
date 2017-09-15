@@ -37,8 +37,8 @@
               <li>
                   <a href="#">Create</a>
                   <ul>
-                    <li><a href="#">List</a></li>
-                    <li><a href="#">Item</a></li>
+                    <li><a (click)="toggleNewList = !toggleNewList">List</a></li>
+                    <li><a (click)="toggleNewItem = !toggleNewItem">Item</a></li>
                   </ul>
               </li>
               <li>
@@ -48,18 +48,21 @@
       </div>
   </div>
 
-  <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    console.log('AHAHAHAHAHHAHAHA!')
-    </script>
+
 
 <div id="page-content-wrapper">
   <div class="container-fluid main-container" style="width: 607px;text-align:center;height: 358px;margin: auto 0;">
     <router-outlet></router-outlet>
   </div> 
+
+  <div *ngIf="toggleNewList" class="create-container">
+      <create-list [user]="user" ></create-list>
+  </div>
+  
+  <div *ngIf="toggleNewItem" class="create-container">
+    <create-item *ngIf="toggleNewItem"></create-item>
+  </div>
+
 </div>
 
 
